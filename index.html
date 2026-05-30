@@ -380,7 +380,7 @@
         card.className = 'work-card';
         card.onclick = () => openLightbox(shown + i);
         if (w.src) {
-          card.innerHTML = `<img src="${w.src}" alt="${w.title}"><div class="work-info"><p class="work-title">${w.title}</p><p class="work-tag">${w.tag}</p></div>`;
+          card.innerHTML = `<img src="${w.src}" alt="">;<div class="work-info"><p class="work-title">${w.title}</p><p class="work-tag">${w.tag}</p></div>`;
         } else {
           card.innerHTML = `<div class="work-card-placeholder">画像をここに</div><div class="work-info"><p class="work-title">${w.title}</p><p class="work-tag">${w.tag}</p></div>`;
         }
