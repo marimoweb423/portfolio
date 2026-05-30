@@ -378,7 +378,8 @@
   next.forEach((w, i) => {
     const card = document.createElement('div');
     card.className = 'work-card';
-    card.onclick = () => openLightbox(shown + i);
+   const idx = shown + i;
+card.onclick = () => openLightbox(idx);
     if (w.src) {
       card.innerHTML = `<img src="${w.src}" alt="">`;
     } else {
