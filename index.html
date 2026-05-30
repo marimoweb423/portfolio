@@ -372,23 +372,23 @@
     const PER_PAGE = 20;
     let shown = 0;
 
-    function renderWorks() {
-      const grid = document.getElementById('portfolioGrid');
-      const next = works.slice(shown, shown + PER_PAGE);
-      next.forEach((w, i) => {
-        const card = document.createElement('div');
-        card.className = 'work-card';
-        card.onclick = () => openLightbox(shown + i);
-        if (w.src) {
-       card.innerHTML = `<img src="${w.src}" alt="">`;
-        } else {
-          card.innerHTML = `<div class="work-card-placeholder">画像をここに</div><div class="work-info"><p class="work-title">${w.title}</p><p class="work-tag">${w.tag}</p></div>`;
-        }
-        grid.appendChild(card);
-      });
-      shown += next.length;
-      document.getElementById('moreBtn').style.display = shown < works.length ? 'block' : 'none';
+   function renderWorks() {
+  const grid = document.getElementById('portfolioGrid');
+  const next = works.slice(shown, shown + PER_PAGE);
+  next.forEach((w, i) => {
+    const card = document.createElement('div');
+    card.className = 'work-card';
+    card.onclick = () => openLightbox(shown + i);
+    if (w.src) {
+      card.innerHTML = `<img src="${w.src}" alt="">`;
+    } else {
+      card.innerHTML = `<div class="work-card-placeholder">画像をここに</div>`;
     }
+    grid.appendChild(card);
+  });
+  shown += next.length;
+  document.getElementById('moreBtn').style.display = shown < works.length ? 'block' : 'none';
+}
 
     function loadMore() { renderWorks(); }
 
