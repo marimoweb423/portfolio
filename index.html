@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', 'Inter', sans-serif;
+      background: #F2F2F2;
+      color: #222;
+    }
+
+    /* ナビゲーション */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #F2F2F2;
+      border-bottom: 1px solid #D0D0D0;
+      height: 56px;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-name {
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      font-size: 13px;
+      color: #666;
+      text-decoration: none;
+    }
+    .nav-links a:hover { color: #222; }
+
+    /* ヒーロー */
+    .hero {
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 14px;
+      color: #777;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
+    .badge {
+      font-size: 11px;
+      background: #E8E8E8;
+      color: #555;
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+
+    /* 区切り線 */
+    hr {
+      border: none;
+      border-top: 1px solid #DFDFDF;
+      margin: 0 2rem;
+    }
+
+    /* セクション共通 */
+    section { padding: 2.5rem 2rem; }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: #999;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Works グリッド */
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 900px) {
+      .works-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .works-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .work-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #E0E0E0;
+    }
+    .work-thumb {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      background: #ECECEC;
+    }
+    /* 画像がない場合のプレースホルダー */
+    .work-thumb-placeholder {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: #ECECEC;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #AAA;
+    }
+    .work-info { padding: 10px 12px; }
+    .work-title { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+    .work-tag { font-size: 11px; color: #999; }
+
+    /* About */
+    .about-card {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #E0E0E0;
+      padding: 1.5rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    @media (max-width: 480px) {
+      .about-card { flex-direction: column; }
+    }
+    .avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #DCDCDC;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 500;
+      color: #888;
+    }
+    .about-text h2 { font-size: 16px; font-weight: 500; margin-bottom: 6px; }
+    .about-text p { font-size: 13px; color: #777; line-height: 1.8; }
+    .skills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .skill {
+      font-size: 11px;
+      background: #EEEEEE;
+      color: #555;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    /* Contact */
+    .contact-area {
+      text-align: center;
+      padding: 2rem 2rem 3.5rem;
+    }
+    .contact-area p { font-size: 13px; color: #888; margin-bottom: 1rem; }
+    .contact-btn {
+      display: inline-block;
+      font-size: 13px;
+      color: #444;
+      border: 1px solid #C0C0C0;
+      padding: 9px 28px;
+      border-radius: 6px;
+      text-decoration: none;
+      background: #fff;
+      transition: background 0.15s;
+    }
+    .contact-btn:hover { background: #F5F5F5; }
+  </style>
+</head>
+<body>
+
+  <!-- ナビゲーション -->
+  <nav>
+    <span class="nav-name">LimDs</span>
+    <div class="nav-links">
+      <a href="#works">Works</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ヒーロー -->
+  <div class="hero">
+    <h1>Webデザイナーを目指して<br>制作しています</h1>
+    <p>バナー・Webデザイン・LPデザインなど、<br>日々の学習と制作をまとめたポートフォリオです。</p>
+    <div class="badges">
+      <span class="badge">Figma</span>
+      <span class="badge">sutudio</span>
+      <span class="badge">Illustrator&Photoshop</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Works -->
+  <section id="works">
+    <p class="section-label">Works</p>
+    <div class="works-grid">
+
+      <!-- 作品カード（画像あり版） -->
+      <!-- <img> の src に画像URLを入れると表示されます -->
+      <!--
+      <div class="work-card">
+        <img class="work-thumb" src="画像のURL" alt="作品タイトル">
+        <div class="work-info">
+          <p class="work-title">作品タイトル</p>
+          <p class="work-tag">Web デザイン</p>
+        </div>
+      </div>
+      -->
+
+      <!-- プレースホルダー（画像が用意できたら上のコードに差し替え） -->
+      <div class="work-card">
+        <div class="work-thumb-placeholder">https://drive.google.com/file/d/1_MbZOwUzsMKlizzKypOEHxMJiIwFcyGv/view?usp=drive_link</div>
+        <div class="work-info">
+          <p class="work-title">LP デザイン</p>
+          <p class="work-tag">Web デザイン</p>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb-placeholder">https://drive.google.com/file/d/1jwmdB4W_dUFK2jTEAJNvueE7jTDIR0Y3/view?usp=sharing</div>
+        <div class="work-info">
+          <p class="work-title">バナー制作</p>
+          <p class="work-tag">バナー・広告</p>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb-placeholder">画像をここに</div>
+        <div class="work-info">
+          <p class="work-title">イラスト作品</p>
+          <p class="work-tag">イラスト</p>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb-placeholder">画像をここに</div>
+        <div class="work-info">
+          <p class="work-title">スマホ版 UI</p>
+          <p class="work-tag">Web デザイン</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- About -->
+  <section id="about">
+    <p class="section-label">About</p>
+    <div class="about-card">
+      <div class="avatar">LimDs</div>
+      <div class="about-text">
+        <h2>LimDs</h2>
+        <p>Webデザイナーを目指して学習中です。<br>使いやすくて見やすいデザインを心がけています。</p>
+        <div class="skills">
+          <span class="skill">Figma</span>
+          <span class="skill">studio</span>
+          <span class="skill">HTML</span>
+          <span class="skill">CSS</span>
+          <span class="skill">Illustrator</span>
+          <span class="skill">Photoshop</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- Contact -->
+  <div class="contact-area" id="contact">
+    <p class="section-label">Contact</p>
+    <p>お仕事のご依頼・ご質問はこちらからどうぞ</p>
+    <!-- href の "your@email.com" を自分のメアドに変更してください -->
+    <a class="contact-btn" href="ogawamarimo423g@gmail.com">メールを送る</a>
+  </div>
+
+</body>
+</html>
