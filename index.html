@@ -12,52 +12,77 @@
       font-family: 'Noto Sans JP', 'Inter', sans-serif;
       background: #F2F2F2;
       color: #222;
+      display: flex;
+      min-height: 100vh;
     }
 
-    /* ナビゲーション */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: #F2F2F2;
-      border-bottom: 1px solid #D0D0D0;
-      height: 56px;
-      padding: 0 2rem;
+    /* ===== サイドメニュー ===== */
+    .sidebar {
+      width: 200px;
+      min-height: 100vh;
+      background: #EBEBEB;
+      border-right: 1px solid #D8D8D8;
+      padding: 2.5rem 1.5rem;
+      position: fixed;
+      top: 0; left: 0;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      gap: 0.25rem;
     }
-    .nav-name {
-      font-size: 15px;
+    .sidebar-name {
+      font-size: 14px;
       font-weight: 500;
-      letter-spacing: 0.05em;
+      color: #333;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.04em;
     }
-    .nav-links { display: flex; gap: 1.5rem; }
-    .nav-links a {
+    .sidebar a {
+      display: block;
       font-size: 13px;
       color: #666;
       text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
     }
-    .nav-links a:hover { color: #222; }
+    .sidebar a:hover, .sidebar a.active {
+      background: #DEDEDE;
+      color: #222;
+    }
 
-    /* ヒーロー */
-    .hero {
-      padding: 4rem 2rem 3rem;
-      text-align: center;
+    /* ===== メインコンテンツ ===== */
+    .main {
+      margin-left: 200px;
+      flex: 1;
+      padding: 3rem 2.5rem;
     }
-    .hero h1 {
+
+    /* ===== セクション共通 ===== */
+    .section { display: none; }
+    .section.active { display: block; }
+    .section-title {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: #999;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    /* ===== HOME ===== */
+    .home-hero h1 {
       font-size: 26px;
       font-weight: 500;
       line-height: 1.5;
       margin-bottom: 1rem;
     }
-    .hero p {
+    .home-hero p {
       font-size: 14px;
       color: #777;
       line-height: 1.8;
+      max-width: 480px;
       margin-bottom: 1.5rem;
     }
-    .badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; }
     .badge {
       font-size: 11px;
       background: #E8E8E8;
@@ -66,53 +91,33 @@
       border-radius: 20px;
     }
 
-    /* 区切り線 */
-    hr {
-      border: none;
-      border-top: 1px solid #DFDFDF;
-      margin: 0 2rem;
-    }
-
-    /* セクション共通 */
-    section { padding: 2.5rem 2rem; }
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      color: #999;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Works グリッド */
-    .works-grid {
+    /* ===== PORTFOLIO ===== */
+    .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
     }
-    @media (max-width: 900px) {
-      .works-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 480px) {
-      .works-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
     .work-card {
       background: #fff;
       border-radius: 10px;
       overflow: hidden;
       border: 1px solid #E0E0E0;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .work-thumb {
+    .work-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+    .work-card img {
       width: 100%;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 4/3;
       object-fit: cover;
       display: block;
-      background: #ECECEC;
     }
-    /* 画像がない場合のプレースホルダー */
-    .work-thumb-placeholder {
+    .work-card-placeholder {
       width: 100%;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 4/3;
       background: #ECECEC;
       display: flex;
       align-items: center;
@@ -124,172 +129,309 @@
     .work-title { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
     .work-tag { font-size: 11px; color: #999; }
 
-    /* About */
-    .about-card {
+    .more-btn {
+      display: block;
+      margin: 2rem auto 0;
+      font-size: 13px;
+      color: #555;
       background: #fff;
-      border-radius: 12px;
-      border: 1px solid #E0E0E0;
-      padding: 1.5rem;
+      border: 1px solid #CCC;
+      padding: 8px 28px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .more-btn:hover { background: #F0F0F0; }
+
+    /* ===== ライトボックス ===== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
       display: flex;
-      gap: 1.5rem;
-      align-items: flex-start;
+      align-items: center;
+      gap: 1rem;
     }
-    @media (max-width: 480px) {
-      .about-card { flex-direction: column; }
+    .lightbox img {
+      max-width: 80vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 8px;
     }
-    .avatar {
-      width: 52px;
-      height: 52px;
+    .lb-btn {
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: #DCDCDC;
-      flex-shrink: 0;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
-      font-weight: 500;
-      color: #888;
+      transition: background 0.15s;
+      flex-shrink: 0;
     }
-    .about-text h2 { font-size: 16px; font-weight: 500; margin-bottom: 6px; }
-    .about-text p { font-size: 13px; color: #777; line-height: 1.8; }
-    .skills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-    .skill {
+    .lb-btn:hover { background: rgba(255,255,255,0.3); }
+    .lb-close {
+      position: absolute;
+      top: -48px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* ===== PROFILE ===== */
+    .profile-card {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #E0E0E0;
+      padding: 2rem;
+      max-width: 560px;
+    }
+    .profile-name { font-size: 20px; font-weight: 500; margin-bottom: 0.5rem; }
+    .profile-bio { font-size: 13px; color: #666; line-height: 1.8; margin-bottom: 1.5rem; }
+    .profile-block { margin-bottom: 1.5rem; }
+    .profile-block h3 { font-size: 11px; letter-spacing: 0.1em; color: #999; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
       font-size: 11px;
       background: #EEEEEE;
       color: #555;
-      padding: 3px 10px;
+      padding: 3px 12px;
       border-radius: 20px;
     }
-
-    /* Contact */
-    .contact-area {
-      text-align: center;
-      padding: 2rem 2rem 3.5rem;
+    .history-list { list-style: none; }
+    .history-list li {
+      font-size: 13px;
+      color: #555;
+      padding: 6px 0;
+      border-bottom: 1px solid #F0F0F0;
+      display: flex;
+      gap: 1rem;
     }
-    .contact-area p { font-size: 13px; color: #888; margin-bottom: 1rem; }
+    .history-list li span:first-child { color: #999; font-size: 12px; min-width: 60px; }
+
+    /* ===== CONTACT ===== */
+    .contact-wrap {
+      max-width: 400px;
+    }
+    .contact-wrap p { font-size: 14px; color: #666; line-height: 1.8; margin-bottom: 1.5rem; }
     .contact-btn {
       display: inline-block;
       font-size: 13px;
       color: #444;
       border: 1px solid #C0C0C0;
-      padding: 9px 28px;
+      padding: 10px 28px;
       border-radius: 6px;
       text-decoration: none;
       background: #fff;
       transition: background 0.15s;
     }
     .contact-btn:hover { background: #F5F5F5; }
+
+    /* ===== レスポンシブ ===== */
+    @media (max-width: 680px) {
+      .sidebar { width: 100%; min-height: auto; position: static; flex-direction: row; align-items: center; padding: 1rem 1.5rem; gap: 1rem; border-right: none; border-bottom: 1px solid #D8D8D8; }
+      .sidebar-name { margin-bottom: 0; }
+      body { flex-direction: column; }
+      .main { margin-left: 0; padding: 2rem 1.25rem; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- ナビゲーション -->
-  <nav>
-    <span class="nav-name">LimDs</span>
-    <div class="nav-links">
-      <a href="#works">Works</a>
-      <a href="#about">profile</a>
-      <a href="#contact">Contact</a>
-    </div>
+  <!-- サイドメニュー -->
+  <nav class="sidebar">
+    <div class="sidebar-name">YOUR NAME</div>
+    <a href="#" class="active" onclick="showSection('home', this)">Home</a>
+    <a href="#" onclick="showSection('portfolio', this)">Portfolio</a>
+    <a href="#" onclick="showSection('profile', this)">Profile</a>
+    <a href="#" onclick="showSection('contact', this)">Contact</a>
   </nav>
 
-  <!-- ヒーロー -->
-  <div class="hero">
-    <h1>Webデザイナーを目指して<br>制作しています</h1>
-    <p>バナー・Webデザイン・LPデザインなど、<br>日々の学習と制作をまとめたポートフォリオです。</p>
-    <div class="badges">
-      <span class="badge">Figma</span>
-      <span class="badge">sutudio</span>
-      <span class="badge">Illustrator&Photoshop</span>
+  <!-- メインコンテンツ -->
+  <main class="main">
+
+    <!-- HOME -->
+    <div id="home" class="section active">
+      <p class="section-title">Home</p>
+      <div class="home-hero">
+        <h1>Webデザイナーを目指して<br>制作しています</h1>
+        <p>バナー・Webデザイン・イラストなど、日々の学習と制作をまとめたポートフォリオです。</p>
+        <div class="badges">
+          <span class="badge">Figma</span>
+          <span class="badge">studio</span>
+          <span class="badge">Illustrator/Photoshop</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTFOLIO -->
+    <div id="portfolio" class="section">
+      <p class="section-title">Portfolio</p>
+      <div class="portfolio-grid" id="portfolioGrid"></div>
+      <button class="more-btn" id="moreBtn" onclick="loadMore()" style="display:none">More</button>
+    </div>
+
+    <!-- PROFILE -->
+    <div id="profile" class="section">
+      <p class="section-title">Profile</p>
+      <div class="profile-card">
+        <p class="profile-name">YOUR NAME</p>
+        <p class="profile-bio">Webデザイナーを目指して学習中です。使いやすくて見やすいデザインを心がけています。</p>
+
+        <div class="profile-block">
+          <h3>Skills</h3>
+          <div class="tags">
+            <span class="tag">Figma</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">Illustrator</span>
+            <span class="tag">Photoshop</span>
+          </div>
+        </div>
+
+        <div class="profile-block">
+          <h3>Tools</h3>
+          <div class="tags">
+            <span class="tag">VS Code</span>
+            <span class="tag">GitHub</span>
+            <span class="tag">Notion</span>
+          </div>
+        </div>
+
+        <div class="profile-block">
+          <h3>History</h3>
+          <ul class="history-list">
+            <li><span>2026</span><span>デザインの学習を開始</span></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="contact" class="section">
+      <p class="section-title">Contact</p>
+      <div class="contact-wrap">
+        <p>お仕事のご依頼・ご質問はお気軽にどうぞ。</p>
+        <!-- your@email.com を自分のメアドに変更してください -->
+        <a class="contact-btn" href="marimo.web423@gmail.com">メールを送る</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ライトボックス -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-inner">
+      <button class="lb-close" onclick="closeLightbox()">✕</button>
+      <button class="lb-btn" onclick="changeImage(-1)">&#8592;</button>
+      <img id="lbImg" src="" alt="">
+      <button class="lb-btn" onclick="changeImage(1)">&#8594;</button>
     </div>
   </div>
 
-  <hr>
+  <script>
+    // ===== 作品データ =====
+    // 作品を追加するときはここにオブジェクトを追加するだけ！
+    // src: "images/ファイル名.jpg" の形式で指定
+   const works = [
+  { src: "images/w-0001.jpg" },
+  { src: "images/w-0002.jpg" },
+  { src: "images/w-0003.jpg" },
+  { src: "images/w-0004.jpg" },
+  { src: "images/w-0005.jpg" },
+  { src: "images/w-0006.jpg" },
+  { src: "images/w-0007.jpg" },
+  { src: "images/w-0008.jpg" },
+  { src: "images/w-0009.png" },
+  { src: "images/w-0010.jpg" },
+  { src: "images/w-0011.jpg" },
+  { src: "images/w-0012.jpg" },
+];
+      // ↓ 作品を追加する場合はここにコピペ
+      // { src: "images/work5.jpg", title: "作品タイトル", tag: "カテゴリ" },
+  
 
-  <!-- Works -->
-  <section id="works">
-    <p class="section-label">Works</p>
-    <div class="works-grid">
+    const PER_PAGE = 20;
+    let shown = 0;
 
-      <!-- 作品カード（画像あり版） -->
-      <!-- <img> の src に画像URLを入れると表示されます -->
-      <!--
-      <div class="work-card">
-        <img class="work-thumb" src="画像のURL" alt="作品タイトル">
-        <div class="work-info">
-          <p class="work-title">作品タイトル</p>
-          <p class="work-tag">Web デザイン</p>
-        </div>
-      </div>
-      -->
+    function renderWorks() {
+      const grid = document.getElementById('portfolioGrid');
+      const next = works.slice(shown, shown + PER_PAGE);
+      next.forEach((w, i) => {
+        const card = document.createElement('div');
+        card.className = 'work-card';
+        card.onclick = () => openLightbox(shown + i);
+        if (w.src) {
+          card.innerHTML = `<img src="${w.src}" alt="${w.title}"><div class="work-info"><p class="work-title">${w.title}</p><p class="work-tag">${w.tag}</p></div>`;
+        } else {
+          card.innerHTML = `<div class="work-card-placeholder">画像をここに</div><div class="work-info"><p class="work-title">${w.title}</p><p class="work-tag">${w.tag}</p></div>`;
+        }
+        grid.appendChild(card);
+      });
+      shown += next.length;
+      document.getElementById('moreBtn').style.display = shown < works.length ? 'block' : 'none';
+    }
 
-      <!-- プレースホルダー（画像が用意できたら上のコードに差し替え） -->
-      <div class="work-card">
-        <div class="work-thumb-placeholder">https://drive.google.com/file/d/1_MbZOwUzsMKlizzKypOEHxMJiIwFcyGv/view?usp=drive_link</div>
-        <div class="work-info">
-          <p class="work-title">LP デザイン</p>
-          <p class="work-tag">Web デザイン</p>
-        </div>
-      </div>
+    function loadMore() { renderWorks(); }
 
-      <div class="work-card">
-        <div class="work-thumb-placeholder">https://drive.google.com/file/d/1jwmdB4W_dUFK2jTEAJNvueE7jTDIR0Y3/view?usp=sharing</div>
-        <div class="work-info">
-          <p class="work-title">バナー制作</p>
-          <p class="work-tag">バナー・広告</p>
-        </div>
-      </div>
+    // ===== ライトボックス =====
+    let currentIdx = 0;
+    function openLightbox(idx) {
+      currentIdx = idx;
+      const w = works[idx];
+      if (!w.src) return;
+      document.getElementById('lbImg').src = w.src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+    function changeImage(dir) {
+      let next = currentIdx + dir;
+      while (next >= 0 && next < works.length && !works[next].src) next += dir;
+      if (next >= 0 && next < works.length && works[next].src) {
+        currentIdx = next;
+        document.getElementById('lbImg').src = works[next].src;
+      }
+    }
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') changeImage(1);
+      if (e.key === 'ArrowLeft') changeImage(-1);
+    });
 
-      <div class="work-card">
-        <div class="work-thumb-placeholder">画像をここに</div>
-        <div class="work-info">
-          <p class="work-title">イラスト作品</p>
-          <p class="work-tag">イラスト</p>
-        </div>
-      </div>
-
-      <div class="work-card">
-        <div class="work-thumb-placeholder">画像をここに</div>
-        <div class="work-info">
-          <p class="work-title">スマホ版 UI</p>
-          <p class="work-tag">Web デザイン</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <hr>
-
-  <!-- About -->
-  <section id="about">
-    <p class="section-label">About</p>
-    <div class="about-card">
-      <div class="avatar">LimDs</div>
-      <div class="about-text">
-        <h2>LimDs</h2>
-        <p>Webデザイナーを目指して学習中です。<br>使いやすくて見やすいデザインを心がけています。</p>
-        <div class="skills">
-          <span class="skill">Figma</span>
-          <span class="skill">studio</span>
-          <span class="skill">HTML</span>
-          <span class="skill">CSS</span>
-          <span class="skill">Illustrator</span>
-          <span class="skill">Photoshop</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr>
-
-  <!-- Contact -->
-  <div class="contact-area" id="contact">
-    <p class="section-label">Contact</p>
-    <p>お仕事のご依頼・ご質問はこちらからどうぞ</p>
-    <!-- href の "your@email.com" を自分のメアドに変更してください -->
-    <a class="contact-btn" href="ogawamarimo423g@gmail.com">メールを送る</a>
-  </div>
+    // ===== セクション切り替え =====
+    function showSection(id, el) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      el.classList.add('active');
+      if (id === 'portfolio' && shown === 0) renderWorks();
+      return false;
+    }
+  </script>
 
 </body>
 </html>
