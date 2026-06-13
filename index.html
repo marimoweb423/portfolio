@@ -20,15 +20,10 @@
       --pale: #fdf9f2;
     }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Noto Sans JP', sans-serif;
-      background: var(--bg);
-      color: var(--dark);
-      min-height: 100vh;
-    }
+    body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg); color: var(--dark); min-height: 100vh; }
     .site { max-width: 900px; margin: 0 auto; }
 
-    /* ==================== NAV ==================== */
+    /* NAV */
     nav {
       background: var(--bg);
       border-bottom: 3px solid var(--yellow);
@@ -44,16 +39,13 @@
     .nav-logo-box {
       width: 80px;
       height: 34px;
-      background: var(--card);
-      border: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      overflow: hidden;
     }
-    /* ロゴ画像を入れる場合は下記に差し替え */
-    /* .nav-logo-box img { width: 100%; height: auto; display: block; } */
-    .nav-logo-ph { font-size: 8px; letter-spacing: .1em; color: var(--sub); }
+    .nav-logo-box img { width: 100%; height: 100%; object-fit: contain; }
     .nav-links { display: flex; gap: 1.8rem; list-style: none; }
     .nav-links a {
       font-size: 13px;
@@ -68,39 +60,41 @@
     .nav-links a:hover { color: var(--dark); border-bottom-color: var(--yellow); }
     .nav-links a.active { color: var(--dark); border-bottom: 2px solid var(--yellow); }
 
-    /* ==================== PAGE SWITCH ==================== */
+    /* PAGE SWITCH */
     .page { display: none; }
     .page.active { display: block; }
 
-    /* ==================== HERO ==================== */
+    /* HERO */
     .hero {
       background: var(--yellow);
       padding: 56px 48px;
       display: grid;
       grid-template-columns: 1fr 1.15fr;
-      gap: 40px;
-      align-items: start;
+      gap: 0;
+      align-items: center;
     }
-    .hero-logo-box {
-      background: rgba(255,255,255,0.35);
-      width: 100%;
-      aspect-ratio: 4 / 3;
+    .hero-left {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      margin-bottom: 16px;
-      border: 1px solid rgba(42,37,32,0.1);
+      padding-right: 32px;
+      border-right: 1px solid rgba(42,37,32,0.18);
     }
-    /* ロゴ画像を入れる場合 */
-    /* .hero-logo-box img { width: 100%; height: 100%; object-fit: contain; } */
-    .logo-placeholder { font-size: 11px; letter-spacing: 0.18em; color: rgba(42,37,32,0.4); }
+    .hero-logo-img {
+      width: 60%;
+      max-width: 180px;
+      margin-bottom: 16px;
+    }
+    .hero-logo-img img { width: 100%; height: auto; display: block; }
     .welcome {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 500;
       letter-spacing: 0.14em;
-      color: rgba(42,37,32,0.75);
+      color: rgba(42,37,32,0.7);
       text-align: center;
     }
+    .hero-right { padding-left: 40px; }
     .concept-label {
       font-size: 12px;
       letter-spacing: 0.22em;
@@ -124,7 +118,7 @@
       letter-spacing: 0.03em;
     }
 
-    /* ==================== SECTIONS ==================== */
+    /* SECTIONS */
     .sec { padding: 60px 48px; border-top: 3px solid var(--yellow); }
     .sec-pale { background: var(--pale); }
     .sec-card { background: var(--card); }
@@ -138,13 +132,8 @@
       text-transform: uppercase;
     }
 
-    /* ==================== PROFILE ==================== */
-    .profile-inner {
-      display: grid;
-      grid-template-columns: 1fr 130px;
-      gap: 40px;
-      align-items: start;
-    }
+    /* PROFILE */
+    .profile-inner { display: grid; grid-template-columns: 1fr 130px; gap: 40px; align-items: start; }
     .profile-name { font-size: 14px; font-weight: 500; color: var(--dark); margin-bottom: 4px; letter-spacing: 0.06em; }
     .profile-role { font-size: 11px; letter-spacing: 0.2em; color: var(--sub); margin-bottom: 20px; }
     .profile-text { font-size: 12px; line-height: 2.1; color: rgba(42,37,32,0.75); margin-bottom: 24px; }
@@ -154,16 +143,11 @@
       border-radius: 50%;
       background: var(--card);
       border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       flex-shrink: 0;
       margin-top: 32px;
       overflow: hidden;
     }
-    /* プロフ画像を入れる場合 */
-    /* .profile-avatar img { width: 100%; height: 100%; object-fit: cover; } */
-    .avatar-ph { font-size: 9px; letter-spacing: .1em; color: var(--sub); }
+    .profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
     .skills-block { margin-bottom: 16px; }
     .skills-block h4 {
       font-size: 11px;
@@ -183,7 +167,7 @@
       border: 1px solid var(--yellow);
     }
 
-    /* ==================== WORKS (HOME) ==================== */
+    /* WORKS (HOME) */
     .works-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .work-cat-btn {
       background: var(--bg);
@@ -212,7 +196,7 @@
     }
     .work-cat-btn:hover::after { transform: scaleX(1); }
 
-    /* ==================== PROCESS ==================== */
+    /* PROCESS */
     .process-steps { display: flex; flex-direction: column; }
     .p-step {
       display: grid;
@@ -223,18 +207,11 @@
       border-bottom: 1px solid var(--border);
     }
     .p-step:last-child { border-bottom: none; }
-    .p-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      font-weight: 300;
-      color: var(--yellow);
-      line-height: 1;
-      padding-top: 2px;
-    }
+    .p-num { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--yellow); line-height: 1; padding-top: 2px; }
     .p-title { font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 6px; }
     .p-desc { font-size: 12px; color: var(--muted); line-height: 1.9; }
 
-    /* ==================== CONTACT ==================== */
+    /* CONTACT */
     .contact-inner { text-align: center; }
     .contact-title { font-size: 22px; font-weight: 400; color: var(--dark); margin-bottom: 10px; letter-spacing: 0.06em; }
     .contact-divider { width: 32px; height: 2px; background: var(--yellow); margin: 0 auto 20px; }
@@ -256,7 +233,7 @@
     }
     .btn-yellow:hover { background: var(--yd); }
 
-    /* ==================== FOOTER ==================== */
+    /* FOOTER */
     footer {
       background: var(--dark);
       padding: 22px 2.5rem;
@@ -265,19 +242,11 @@
       align-items: center;
       border-top: 3px solid var(--yellow);
     }
-    .footer-logo-box {
-      width: 64px;
-      height: 28px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(244,193,33,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .footer-logo-ph { font-size: 8px; letter-spacing: .1em; color: rgba(255,255,255,0.3); }
+    .footer-logo { width: 56px; height: 24px; display: flex; align-items: center; }
+    .footer-logo img { width: 100%; height: 100%; object-fit: contain; filter: brightness(2.5); }
     .footer-copy { font-size: 10px; color: rgba(255,255,255,0.22); letter-spacing: .1em; }
 
-    /* ==================== PORTFOLIO PAGE ==================== */
+    /* PORTFOLIO PAGE */
     .subnav {
       background: var(--bg);
       border-bottom: 2px solid var(--border);
@@ -303,7 +272,6 @@
     }
     .subnav a:hover { color: var(--dark); }
     .subnav a.active { color: var(--dark); border-bottom: 3px solid var(--yellow); }
-
     .tab-section { display: none; padding: 48px; background: var(--bg); }
     .tab-section.active { display: block; }
 
@@ -316,6 +284,8 @@
       overflow: hidden;
       cursor: pointer;
       transition: transform .2s, box-shadow .2s;
+      text-decoration: none;
+display: block;
     }
     .lp-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(42,37,32,0.1); }
     .lp-thumb {
@@ -328,9 +298,7 @@
       position: relative;
       overflow: hidden;
     }
-    /* 作品画像を入れる場合 */
-    /* .lp-thumb img { width: 100%; height: 100%; object-fit: cover; } */
-    .lp-thumb-ph { font-size: 10px; letter-spacing: .12em; color: var(--sub); }
+    .lp-thumb img { width: 100%; height: 100%; object-fit: cover; }
     .lp-thumb::after {
       content: '';
       position: absolute;
@@ -344,6 +312,13 @@
     .lp-card:hover .lp-thumb::after { transform: scaleX(1); }
     .lp-info { padding: 14px 16px; }
     .lp-title { font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 6px; }
+    .lp-desc {
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-top: 4px;
+}
+    
     .lp-view {
       font-size: 11px;
       color: var(--yellow);
@@ -370,15 +345,10 @@
       width: 100%;
       aspect-ratio: 4 / 3;
       background: var(--card);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
       overflow: hidden;
+      position: relative;
     }
-    /* 作品画像を入れる場合 */
-    /* .banner-thumb img { width: 100%; height: 100%; object-fit: cover; } */
-    .banner-thumb-ph { font-size: 10px; letter-spacing: .12em; color: var(--sub); }
+    .banner-thumb img { width: 100%; height: 100%; object-fit: cover; }
     .banner-thumb::after {
       content: '';
       position: absolute;
@@ -393,7 +363,7 @@
     .banner-info { padding: 10px 12px; }
     .banner-title { font-size: 12px; color: var(--dark); }
 
-    /* ==================== LIGHTBOX ==================== */
+    /* LIGHTBOX */
     .lightbox {
       display: none;
       position: fixed;
@@ -420,14 +390,12 @@
       aspect-ratio: 16 / 9;
       background: var(--card);
       border-radius: 4px;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
     }
-    /* ライトボックス画像を入れる場合 */
-    /* .lb-img img { width: 100%; height: 100%; object-fit: contain; } */
-    .lb-img-ph { font-size: 11px; letter-spacing: .12em; color: var(--sub); }
+    .lb-img img { width: 100%; height: 100%; object-fit: contain; }
     .lb-btn {
       background: rgba(255,255,255,0.1);
       border: none;
@@ -466,7 +434,7 @@
     .lb-caption-title { font-size: 14px; font-weight: 500; color: #fff; margin-bottom: 8px; }
     .lb-caption-desc { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.9; }
 
-    /* ==================== HAMBURGER ==================== */
+    /* HAMBURGER */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -476,17 +444,10 @@
       background: none;
       border: none;
     }
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--dark);
-      transition: transform .25s, opacity .25s;
-    }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); transition: transform .25s, opacity .25s; }
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
     .mobile-menu {
       display: none;
       position: fixed;
@@ -507,46 +468,37 @@
       letter-spacing: 0.08em;
       cursor: pointer;
       border-left: 3px solid transparent;
-      transition: border-color .15s, color .15s;
+      transition: border-color .15s;
     }
-    .mobile-menu a:hover { border-left-color: var(--yellow); color: var(--dark); }
+    .mobile-menu a:hover { border-left-color: var(--yellow); }
     .mobile-menu a.active { border-left-color: var(--yellow); font-weight: 500; }
 
-    /* プロフィール：名前横に写真（モバイル用） */
-    .profile-name-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 4px;
-    }
-    .profile-name-row .profile-avatar-mobile {
+    /* モバイル：名前横のアバター */
+    .profile-name-row { display: flex; align-items: center; gap: 16px; margin-bottom: 4px; }
+    .profile-avatar-mobile {
       display: none;
       width: 56px;
       height: 56px;
       border-radius: 50%;
       background: var(--card);
       border: 2px solid var(--border);
-      align-items: center;
-      justify-content: center;
       flex-shrink: 0;
       overflow: hidden;
     }
-    .profile-name-row .profile-avatar-mobile .avatar-ph { font-size: 8px; letter-spacing: .1em; color: var(--sub); }
+    .profile-avatar-mobile img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* ==================== RESPONSIVE ==================== */
+    /* RESPONSIVE */
     @media (max-width: 680px) {
       nav { padding: 0 1.25rem; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
-
-      .hero { grid-template-columns: 1fr; padding: 40px 24px; }
+      .hero { grid-template-columns: 1fr; padding: 40px 24px; gap: 24px; }
+      .hero-left { border-right: none; border-bottom: 1px solid rgba(42,37,32,0.18); padding-right: 0; padding-bottom: 24px; }
+      .hero-right { padding-left: 0; }
       .sec { padding: 40px 20px; }
-
-      /* プロフィール：デスクトップの右側アバターを非表示、名前横に小さいアバター表示 */
       .profile-inner { grid-template-columns: 1fr; gap: 0; }
       .profile-avatar { display: none; }
-      .profile-name-row .profile-avatar-mobile { display: flex; }
-
+      .profile-avatar-mobile { display: block; }
       .works-grid { grid-template-columns: 1fr; }
       .subnav { padding: 0 20px; }
       .tab-section { padding: 28px 20px; }
@@ -560,11 +512,10 @@
 <body>
 <div class="site">
 
-  <!-- ==================== NAV ==================== -->
+  <!-- NAV -->
   <nav>
     <div class="nav-logo-box" onclick="showPage('home')">
-      <!-- ロゴ画像: <img src="images/LimDslogo.svg" alt="LimDs"> -->
-      <span class="nav-logo-ph">LOGO</span>
+      <img src="images/LimDslogo.svg" alt="LimDs">
     </div>
     <ul class="nav-links">
       <li><a class="active" onclick="showPage('home')">Home</a></li>
@@ -587,19 +538,18 @@
     <a onclick="showPage('home'); closeMenu(); setTimeout(()=>document.getElementById('contact-sec').scrollIntoView({behavior:'smooth'}),50)">Contact</a>
   </div>
 
-  <!-- ==================== HOME PAGE ==================== -->
+  <!-- HOME PAGE -->
   <div id="home" class="page active">
 
     <!-- HERO -->
     <section class="hero">
-      <div>
-        <div class="hero-logo-box">
-          <!-- ロゴ画像: <img src="images/LimDslogo_B.svg" alt="LimDs"> -->
-          <span class="logo-placeholder">LOGO IMAGE</span>
+      <div class="hero-left">
+        <div class="hero-logo-img">
+          <img src="images/LimDslogo_B.svg" alt="LimDs">
         </div>
         <p class="welcome">Well come to Portfolio</p>
       </div>
-      <div style="padding-top: 4px;">
+      <div class="hero-right">
         <p class="concept-label">Concept</p>
         <p class="concept-headline">「伝わる」を大切にした<br>デザインを。</p>
         <p class="concept-body">
@@ -615,10 +565,9 @@
       <p class="sec-label">Profile</p>
       <div class="profile-inner">
         <div>
-        <div class="profile-name-row">
+          <div class="profile-name-row">
             <div class="profile-avatar-mobile">
-              <!-- プロフ写真（モバイル）: <img src="images/profile.jpg" alt="オガワマリモ"> -->
-              <span class="avatar-ph">PHOTO</span>
+              <img src="images/prof-03.png">
             </div>
             <div>
               <p class="profile-name">オガワマリモ</p>
@@ -629,7 +578,7 @@
             こんにちは！オガワマリモと申します。<br>
             幼い頃は宮崎と北海道、南北両方の自然の洗礼を受け育ち、高校卒業後は東京で出版社・託児所・飲食店での仕事を経験後、エンタメ業界に興味を持ちインディーズバンドのライブ撮影や地下アイドルの運営を経験。その後映像制作会社を経てフリーランスのPM・APとして広告・CM・MV・映画・ドラマの現場に携わりました。<br><br>
             2024年に夢の一つであった１年半にわたる中国語学留学の経験が改めて人生を見直すきっかけとなり、「やはり自分はものづくりが好き！自分の手がけたもので直接お客さんに喜んで欲しい！」という気持ちに気づき、2026年よりwebデザインを学び活動を開始しました。<br><br>
-            新しいことをしたがりがち。高所恐怖症。趣味は漫画と一人旅と中国語（HSK5級）。スパで朝から晩まで漫画を読んでいる時間が宇宙一幸せ！
+            新しいことをしたがりがち。高所恐怖症。趣味は漫画と一人旅と中国語（HSK5級）。スパで朝から晩まで漫画を読んでいる時間が至福のとき。
           </p>
           <div class="skills-block">
             <h4>Skills</h4>
@@ -654,8 +603,7 @@
           </div>
         </div>
         <div class="profile-avatar">
-          <!-- プロフ写真: <img src="images/profile.jpg" alt="オガワマリモ"> -->
-          <span class="avatar-ph">PHOTO</span>
+          <img src="images/prof-03.png">
         </div>
       </div>
     </section>
@@ -679,38 +627,23 @@
       <div class="process-steps">
         <div class="p-step">
           <div class="p-num">01</div>
-          <div>
-            <p class="p-title">お問い合わせ</p>
-            <p class="p-desc">まずはお問い合わせフォームよりお気軽にご相談ください。デザイン制作についてのお悩みや目的などをお聞きし、お見積りを算出します。</p>
-          </div>
+          <div><p class="p-title">お問い合わせ</p><p class="p-desc">まずはお問い合わせフォームよりお気軽にご相談ください。デザイン制作についてのお悩みや目的などをお聞きし、お見積りを算出します。</p></div>
         </div>
         <div class="p-step">
           <div class="p-num">02</div>
-          <div>
-            <p class="p-title">ヒアリング</p>
-            <p class="p-desc">ご要望・目的・規模・イメージをお聞きします。ヒアリング内容を元に、企画・構成・お見積金額についてご提案いたします。</p>
-          </div>
+          <div><p class="p-title">ヒアリング</p><p class="p-desc">ご要望・目的・規模・イメージをお聞きします。ヒアリング内容を元に、企画・構成・お見積金額についてご提案いたします。</p></div>
         </div>
         <div class="p-step">
           <div class="p-num">03</div>
-          <div>
-            <p class="p-title">ご契約</p>
-            <p class="p-desc">ご提案内容に同意いただけましたら、着手金として総額の半金を指定口座にお振込ください。</p>
-          </div>
+          <div><p class="p-title">ご契約</p><p class="p-desc">ご提案内容に同意いただけましたら、着手金として総額の半金を指定口座にお振込ください。</p></div>
         </div>
         <div class="p-step">
           <div class="p-num">04</div>
-          <div>
-            <p class="p-title">制作開始</p>
-            <p class="p-desc">ご提案内容を確認いただいた上で制作に入ります。制作期間中は適宜、進捗報告・確認をしながら進めます。</p>
-          </div>
+          <div><p class="p-title">制作開始</p><p class="p-desc">ご提案内容を確認いただいた上で制作に入ります。制作期間中は適宜、進捗報告・確認をしながら進めます。</p></div>
         </div>
         <div class="p-step">
           <div class="p-num">05</div>
-          <div>
-            <p class="p-title">納品</p>
-            <p class="p-desc">最終チェック・修正後、納品とさせていただきます。</p>
-          </div>
+          <div><p class="p-title">納品</p><p class="p-desc">最終チェック・修正後、納品とさせていただきます。</p></div>
         </div>
       </div>
     </section>
@@ -727,54 +660,46 @@
     </section>
 
     <footer>
-      <div class="footer-logo-box">
-        <!-- <img src="images/LimDslogo.svg" alt="LimDs" style="width:100%;height:auto;filter:brightness(0.5)"> -->
-        <span class="footer-logo-ph">LOGO</span>
+      <div class="footer-logo">
+        <img src="images/LimDslogo.svg" alt="LimDs">
       </div>
       <p class="footer-copy">© 2026 LimDs Portfolio. All rights reserved.</p>
     </footer>
   </div>
 
-  <!-- ==================== PORTFOLIO PAGE ==================== -->
+  <!-- PORTFOLIO PAGE -->
   <div id="portfolio" class="page">
     <div class="subnav">
       <a id="tab-lp" class="active" onclick="showPortfolioTab('lp')">LP / Web</a>
       <a id="tab-banner" onclick="showPortfolioTab('banner')">Banner</a>
     </div>
 
-    <!-- LP / WEB -->
     <div id="sec-lp" class="tab-section active">
-      <div class="lp-grid" id="lpGrid">
-        <!-- JS で生成 -->
-      </div>
+      <div class="lp-grid" id="lpGrid"></div>
     </div>
 
-    <!-- BANNER -->
     <div id="sec-banner" class="tab-section">
-      <div class="banner-grid" id="bannerGrid">
-        <!-- JS で生成 -->
-      </div>
+      <div class="banner-grid" id="bannerGrid"></div>
     </div>
 
     <footer>
-      <div class="footer-logo-box">
-        <span class="footer-logo-ph">LOGO</span>
+      <div class="footer-logo">
+        <img src="images/LimDslogo.svg" alt="LimDs">
       </div>
       <p class="footer-copy">© 2026 LimDs Portfolio. All rights reserved.</p>
     </footer>
   </div>
 
-</div><!-- /.site -->
+</div>
 
-<!-- ==================== LIGHTBOX ==================== -->
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <div class="lb-inner">
     <button class="lb-close" onclick="closeLB()">✕</button>
     <div class="lb-img-row">
       <button class="lb-btn" onclick="changeLB(-1)">&#8592;</button>
       <div class="lb-img">
-        <!-- <img id="lbImg" src="" alt=""> -->
-        <span class="lb-img-ph" id="lbImgPh">IMAGE</span>
+        <img id="lbImg" src="" alt="">
       </div>
       <button class="lb-btn" onclick="changeLB(1)">&#8594;</button>
     </div>
@@ -786,66 +711,48 @@
 </div>
 
 <script>
-  function toggleMenu() {
-    const btn = document.getElementById('hamburger');
-    const menu = document.getElementById('mobileMenu');
-    btn.classList.toggle('open');
-    menu.classList.toggle('open');
-  }
-  function closeMenu() {
-    document.getElementById('hamburger').classList.remove('open');
-    document.getElementById('mobileMenu').classList.remove('open');
-  }
-
-  // ============================================================
-  // 作品データ
-  // src に画像パスを入れてください（例: "images/w-lp-001.jpg"）
-  // ============================================================
+  // 作品データ（タイトル・説明は適宜書き換えてください）
   const works = {
     lp: [
-      { src: '', title: 'サービス紹介LP', desc: 'サービスの魅力を伝えるランディングページです。ターゲットに響くビジュアルと導線設計を意識して制作しました。', url: '' },
-      { src: '', title: 'コーポレートサイト', desc: '企業の信頼感と親しみやすさを両立したWebサイトデザインです。', url: '' },
-      { src: '', title: 'ECサイトLP', desc: '商品の世界観を引き立てるシンプルなECページデザインです。', url: '' },
-      { src: '', title: 'イベントサイト', desc: '告知からエントリーまでをスムーズにつなぐイベントページです。', url: '' },
+      { src: 'images/wlp-001s.png', title: '健康茶購入促進画像LP[Photoshop/studio]', desc: '▫️架空案件 ▫️家族の健康が気になる30代〜40代の主婦層 ▫️漢方への信頼感を出しつつ渋くならずターゲット層に好感が持てるデザインを意識しました', url: 'https://orange799932.studio.site/' },
+      { src: 'images/wlp-002s.png', title: '転職エージェントサイトLP[figma]', desc: '▫️架空案件 ▫️キャリアアップを検討している30代〜40代の男性 ▫️転職への期待感、エージェントへの信頼感、転職を迷っている方に', url: 'https://orange799932.studio.site/002' },
     ],
     banner: [
-      { src: '', title: 'SNSバナー A', desc: 'Instagram用の正方形バナーデザイン。視認性を高めた構成で制作しました。' },
-      { src: '', title: 'SNSバナー B', desc: 'Twitter/X用のバナーデザイン。シンプルなビジュアルで情報を整理しています。' },
-      { src: '', title: 'Web広告バナー', desc: 'Web広告用のバナーデザイン。クリック率を意識したレイアウトです。' },
-      { src: '', title: 'キャンペーンバナー', desc: '季節キャンペーン用のバナーデザインです。' },
-      { src: '', title: 'バナー広告 C', desc: 'サービス訴求用のバナーデザインです。' },
-      { src: '', title: '店舗告知バナー', desc: '店舗の新着情報を告知するためのバナーデザインです。' },
+      { src: 'images/w-0001.jpg', title: '家事代行サービス', desc: '▫️架空案件 ▫️たまには羽を伸ばしたいお母さんや共働きの主婦層 ▫️「家事を休憩」=「自分へのプレゼント」を意識し制作しました' },
+      { src: 'images/w-0002.jpg', title: '女性専用ジム', desc: '▫️架空案件 ▫️20〜50代の女性 ▫️快適に気持ちよく運動ができる空間をイメージできることを意識して制作しました' },
+      { src: 'images/w-0003.jpg', title: 'DX導入セミナー', desc: '▫️架空案件 ▫️DX導入を検討している企業の担当者など ▫️わかりやすい説明と信頼感を意識して制作しました' },
+      { src: 'images/w-0008.jpg', title: 'Dr.コスメブランドNasora ECサイトFV', desc: '▫️実案件 ▫️アンチエイジングが気になる年齢層の女性 ▫️高級感・信頼感を意識して制作しました' },
+      { src: 'images/w-0010.jpg', title: '貴金属買取販売店サイトFV', desc: '▫️架空案件 ▫️高価買取を希望する30〜50代 ▫️「安心感」と「買取価格への期待感」を意識を意識して制作しました' },
+      { src: 'images/w-0011.jpg', title: '貴金属買取販売店サイトFV', desc: '▫️架空案件 ▫️高価買取を希望する30〜50代 ▫️「安心感」と「買取価格への期待感」を意識して制作しました' },
+      { src: 'images/w-0012.jpg', title: '貴金属買取販売店サイトFV', desc: '▫️架空案件 ▫️高価買取を希望する30〜50代 ▫️「安心感」と「買取価格への期待感」を意識して制作しました' },
+      { src: 'images/w-0009.png', title: '転職エージェントサービス', desc: '▫️架空案件 ▫️転職を検討している30代の男性 ▫️信頼感と転職への期待感・相談のしすい親しみやすさを意識して制作しました' },
     ]
   };
+function buildLpGrid() {
+  document.getElementById('lpGrid').innerHTML = works.lp.map((w) => `
+    <a class="lp-card"
+       href="${w.url}"
+       target="_blank"
+       rel="noopener">
 
-  // LP グリッドを生成
-  function buildLpGrid() {
-    const grid = document.getElementById('lpGrid');
-    grid.innerHTML = works.lp.map((w, i) => `
-      <div class="lp-card" onclick="openLB('lp',${i})">
-        <div class="lp-thumb">
-          ${w.src ? `<img src="${w.src}" alt="${w.title}">` : `<span class="lp-thumb-ph">IMAGE</span>`}
-        </div>
-        <div class="lp-info">
-          <p class="lp-title">${w.title}</p>
-          ${w.url ? `<a class="lp-view" href="${w.url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">view</a>`
-                  : `<a class="lp-view" onclick="event.stopPropagation(); openLB('lp',${i})">view</a>`}
-        </div>
+      <div class="lp-thumb">
+        <img src="${w.src}" alt="${w.title}">
       </div>
-    `).join('');
-  }
 
-  // Banner グリッドを生成
+      <div class="lp-info">
+        <p class="lp-title">${w.title}</p>
+        <p class="lp-desc">${w.desc}</p>
+      </div>
+
+    </a>
+  `).join('');
+}
+
   function buildBannerGrid() {
-    const grid = document.getElementById('bannerGrid');
-    grid.innerHTML = works.banner.map((w, i) => `
+    document.getElementById('bannerGrid').innerHTML = works.banner.map((w, i) => `
       <div class="banner-card" onclick="openLB('banner',${i})">
-        <div class="banner-thumb">
-          ${w.src ? `<img src="${w.src}" alt="${w.title}">` : `<span class="banner-thumb-ph">IMAGE</span>`}
-        </div>
-        <div class="banner-info">
-          <p class="banner-title">${w.title}</p>
-        </div>
+        <div class="banner-thumb"><img src="${w.src}" alt="${w.title}"></div>
+        <div class="banner-info"><p class="banner-title">${w.title}</p></div>
       </div>
     `).join('');
   }
@@ -853,9 +760,6 @@
   buildLpGrid();
   buildBannerGrid();
 
-  // ============================================================
-  // ページ切り替え
-  // ============================================================
   function showPage(id) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(id).classList.add('active');
@@ -873,23 +777,20 @@
     currentType = tab;
   }
 
-  // ============================================================
-  // ライトボックス
-  // ============================================================
   let currentType = 'lp', currentIdx = 0;
 
   function openLB(type, idx) {
-    currentType = type;
-    currentIdx = idx;
+    currentType = type; currentIdx = idx;
     updateLB();
     document.getElementById('lightbox').classList.add('open');
   }
 
   function updateLB() {
     const w = works[currentType][currentIdx];
+    document.getElementById('lbImg').src = w.src;
+    document.getElementById('lbImg').alt = w.title;
     document.getElementById('lbTitle').textContent = w.title;
     document.getElementById('lbDesc').textContent = w.desc;
-    // 画像がある場合: document.getElementById('lbImg').src = w.src;
   }
 
   function closeLB() { document.getElementById('lightbox').classList.remove('open'); }
@@ -903,12 +804,20 @@
   document.getElementById('lightbox').addEventListener('click', e => {
     if (e.target === document.getElementById('lightbox')) closeLB();
   });
-
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeLB();
     if (e.key === 'ArrowRight') changeLB(1);
     if (e.key === 'ArrowLeft') changeLB(-1);
   });
+
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
 </script>
 </body>
 </html>
