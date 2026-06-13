@@ -3,385 +3,912 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>LimDs | Webデザイン・LP・バナー制作ポートフォリオ（LimDs）</title>
-
-  <meta name="description" content="2026年より活動中のWebデザイナー、オガワマリモ（LimDs）のポートフォリオサイトです。見る人に伝わりやすく、目的に沿ったLPやバナー、Webデザインを制作しています。お仕事のご依頼はこちらから。">
-  <meta name="robots" content="index, follow">
-
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <title>LimDs | Webデザイン・LP・バナー制作ポートフォリオ</title>
+  <meta name="description" content="Webデザイナー、オガワマリモ（LimDs）のポートフォリオサイトです。LP・バナー・Webデザインを制作しています。">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Noto Sans JP', 'Inter', sans-serif;
-      background: #f8f4ee;
-      color: #2a2520;
-      min-height: 100vh;
-      -webkit-text-size-adjust: 100%; /* iOSでの文字サイズ自動調整を防止 */
+    :root {
+      --bg: #f8f4ee;
+      --yellow: #f4c121;
+      --yd: #e0b010;
+      --dark: #2a2520;
+      --card: #ece8e0;
+      --border: #e0dbd0;
+      --muted: #888078;
+      --sub: #aaa8a0;
+      --pale: #fdf9f2;
     }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+    .site { max-width: 900px; margin: 0 auto; }
 
+    /* ==================== NAV ==================== */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: #f8f4ee;
-      border-bottom: 3px solid #f4c121;
+      background: var(--bg);
+      border-bottom: 3px solid var(--yellow);
       height: 56px;
       padding: 0 2.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    .nav-logo { width: 80px; display: flex; align-items: center; }
-    .nav-logo img { width: 100%; height: auto; display: block; } /* SVGをimgタグで読み込む形に対応 */
-    .nav-logo svg { width: 100%; height: auto; }
-    .nav-logo path, .nav-logo polygon, .nav-logo polyline, .nav-logo rect { fill: #2a2520; stroke: #2a2520; }
-    
-    .nav-links { display: flex; gap: 2rem; }
-    .nav-links a {
-      font-size: 12px;
-      color: #aaa8a0;
-      text-decoration: none;
-      letter-spacing: 0.06em;
-      transition: color 0.15s, border-color 0.15s;
-      padding-bottom: 2px;
-      border-bottom: 2px solid transparent;
-    }
-    .nav-links a:hover { color: #2a2520; }
-    .nav-links a.active { color: #2a2520; border-bottom: 2px solid #f4c121; }
-
-    .main { width: 100%; }
-    .section { display: none; }
-    .section.active { display: block; }
-
-    .fv {
-      min-height: calc(100vh - 56px);
+    .nav-logo-box {
+      width: 80px;
+      height: 34px;
+      background: var(--card);
+      border: 1px solid var(--border);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 16px;
-      text-align: center;
-      padding: 2rem 1.5rem;
+      cursor: pointer;
     }
-    .fv-card {
-      background: #f4c121;
+    /* ロゴ画像を入れる場合は下記に差し替え */
+    /* .nav-logo-box img { width: 100%; height: auto; display: block; } */
+    .nav-logo-ph { font-size: 8px; letter-spacing: .1em; color: var(--sub); }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--sub);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+      transition: color .15s, border-color .15s;
+      cursor: pointer;
+    }
+    .nav-links a:hover { color: var(--dark); border-bottom-color: var(--yellow); }
+    .nav-links a.active { color: var(--dark); border-bottom: 2px solid var(--yellow); }
+
+    /* ==================== PAGE SWITCH ==================== */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ==================== HERO ==================== */
+    .hero {
+      background: var(--yellow);
+      padding: 56px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .hero-logo-box {
+      background: rgba(255,255,255,0.35);
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      border: 1px solid rgba(42,37,32,0.1);
+    }
+    /* ロゴ画像を入れる場合 */
+    /* .hero-logo-box img { width: 100%; height: 100%; object-fit: contain; } */
+    .logo-placeholder { font-size: 11px; letter-spacing: 0.18em; color: rgba(42,37,32,0.4); }
+    .welcome {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      color: rgba(42,37,32,0.75);
+      text-align: center;
+    }
+    .concept-label {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      color: rgba(42,37,32,0.55);
+      margin-bottom: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    .concept-headline {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 18px;
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+    }
+    .concept-body {
+      font-size: 12px;
+      line-height: 2.1;
+      color: rgba(42,37,32,0.75);
+      letter-spacing: 0.03em;
+    }
+
+    /* ==================== SECTIONS ==================== */
+    .sec { padding: 60px 48px; border-top: 3px solid var(--yellow); }
+    .sec-pale { background: var(--pale); }
+    .sec-card { background: var(--card); }
+    .sec-white { background: var(--bg); }
+    .sec-label {
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      color: var(--yellow);
+      margin-bottom: 28px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    /* ==================== PROFILE ==================== */
+    .profile-inner {
+      display: grid;
+      grid-template-columns: 1fr 130px;
+      gap: 40px;
+      align-items: start;
+    }
+    .profile-name { font-size: 14px; font-weight: 500; color: var(--dark); margin-bottom: 4px; letter-spacing: 0.06em; }
+    .profile-role { font-size: 11px; letter-spacing: 0.2em; color: var(--sub); margin-bottom: 20px; }
+    .profile-text { font-size: 12px; line-height: 2.1; color: rgba(42,37,32,0.75); margin-bottom: 24px; }
+    .profile-avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 32px;
+      overflow: hidden;
+    }
+    /* プロフ画像を入れる場合 */
+    /* .profile-avatar img { width: 100%; height: 100%; object-fit: cover; } */
+    .avatar-ph { font-size: 9px; letter-spacing: .1em; color: var(--sub); }
+    .skills-block { margin-bottom: 16px; }
+    .skills-block h4 {
+      font-size: 11px;
+      letter-spacing: .18em;
+      color: var(--yellow);
+      margin-bottom: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-size: 11px;
+      background: var(--bg);
+      color: rgba(42,37,32,0.75);
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--yellow);
+    }
+
+    /* ==================== WORKS (HOME) ==================== */
+    .works-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .work-cat-btn {
+      background: var(--bg);
+      aspect-ratio: 16 / 9;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .work-cat-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(42,37,32,0.1); }
+    .work-cat-btn span { font-size: 13px; letter-spacing: .15em; color: var(--dark); font-weight: 500; }
+    .work-cat-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--yellow);
+      transform: scaleX(0);
+      transition: transform .25s;
+      transform-origin: left;
+    }
+    .work-cat-btn:hover::after { transform: scaleX(1); }
+
+    /* ==================== PROCESS ==================== */
+    .process-steps { display: flex; flex-direction: column; }
+    .p-step {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .p-step:last-child { border-bottom: none; }
+    .p-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--yellow);
+      line-height: 1;
+      padding-top: 2px;
+    }
+    .p-title { font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 6px; }
+    .p-desc { font-size: 12px; color: var(--muted); line-height: 1.9; }
+
+    /* ==================== CONTACT ==================== */
+    .contact-inner { text-align: center; }
+    .contact-title { font-size: 22px; font-weight: 400; color: var(--dark); margin-bottom: 10px; letter-spacing: 0.06em; }
+    .contact-divider { width: 32px; height: 2px; background: var(--yellow); margin: 0 auto 20px; }
+    .contact-sub { font-size: 12px; color: var(--muted); margin-bottom: 28px; line-height: 1.9; }
+    .btn-yellow {
+      display: inline-block;
+      padding: 12px 44px;
+      background: var(--yellow);
+      color: var(--dark);
+      font-size: 12px;
+      letter-spacing: .18em;
+      border: none;
       border-radius: 4px;
-      padding: 3rem 4rem;
+      cursor: pointer;
+      transition: background .15s;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .btn-yellow:hover { background: var(--yd); }
+
+    /* ==================== FOOTER ==================== */
+    footer {
+      background: var(--dark);
+      padding: 22px 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 3px solid var(--yellow);
+    }
+    .footer-logo-box {
+      width: 64px;
+      height: 28px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(244,193,33,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-logo-ph { font-size: 8px; letter-spacing: .1em; color: rgba(255,255,255,0.3); }
+    .footer-copy { font-size: 10px; color: rgba(255,255,255,0.22); letter-spacing: .1em; }
+
+    /* ==================== PORTFOLIO PAGE ==================== */
+    .subnav {
+      background: var(--bg);
+      border-bottom: 2px solid var(--border);
+      padding: 0 48px;
+      display: flex;
+      gap: 2.5rem;
+      position: sticky;
+      top: 56px;
+      z-index: 90;
+    }
+    .subnav a {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      color: var(--sub);
+      text-decoration: none;
+      padding: 16px 0;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      transition: color .15s;
+      display: inline-block;
+      margin-bottom: -2px;
+    }
+    .subnav a:hover { color: var(--dark); }
+    .subnav a.active { color: var(--dark); border-bottom: 3px solid var(--yellow); }
+
+    .tab-section { display: none; padding: 48px; background: var(--bg); }
+    .tab-section.active { display: block; }
+
+    /* LP/WEB grid */
+    .lp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .lp-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .lp-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(42,37,32,0.1); }
+    .lp-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* 作品画像を入れる場合 */
+    /* .lp-thumb img { width: 100%; height: 100%; object-fit: cover; } */
+    .lp-thumb-ph { font-size: 10px; letter-spacing: .12em; color: var(--sub); }
+    .lp-thumb::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--yellow);
+      transform: scaleX(0);
+      transition: transform .3s;
+      transform-origin: left;
+    }
+    .lp-card:hover .lp-thumb::after { transform: scaleX(1); }
+    .lp-info { padding: 14px 16px; }
+    .lp-title { font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 6px; }
+    .lp-view {
+      font-size: 11px;
+      color: var(--yellow);
+      text-decoration: none;
+      letter-spacing: .08em;
+      border-bottom: 1px solid var(--yellow);
+      display: inline-block;
+      cursor: pointer;
+    }
+    .lp-view:hover { color: var(--yd); border-bottom-color: var(--yd); }
+
+    /* BANNER grid */
+    .banner-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .banner-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .banner-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(42,37,32,0.1); }
+    .banner-thumb {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: var(--card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* 作品画像を入れる場合 */
+    /* .banner-thumb img { width: 100%; height: 100%; object-fit: cover; } */
+    .banner-thumb-ph { font-size: 10px; letter-spacing: .12em; color: var(--sub); }
+    .banner-thumb::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--yellow);
+      transform: scaleX(0);
+      transition: transform .3s;
+      transform-origin: left;
+    }
+    .banner-card:hover .banner-thumb::after { transform: scaleX(1); }
+    .banner-info { padding: 10px 12px; }
+    .banner-title { font-size: 12px; color: var(--dark); }
+
+    /* ==================== LIGHTBOX ==================== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(42,37,32,0.93);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .lightbox.open { display: flex; }
+    .lb-inner {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 16px;
-      width: 100%;
-      max-width: 440px; /* スマホで横幅がいっぱいになりすぎないよう制限 */
-      box-sizing: border-box;
+      max-width: 80vw;
     }
-    .fv-logo { width: 280px; max-width: 100%; }
-    .fv-logo img { width: 100%; height: auto; display: block; } /* SVGのimg対応 */
-    .fv-logo svg { width: 100%; height: auto; }
-    .fv-logo path, .fv-logo polygon, .fv-logo polyline, .fv-logo rect { fill: #2a2520; stroke: #2a2520; }
-    .fv-title { font-size: 13px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: #2a2520; }
-    .fv-sub { font-size: 11px; letter-spacing: 0.1em; color: #5a5040; word-break: keep-all; } /* スマホでの意図しない改行を防ぐ */
-    .fv-divider { width: 40px; height: 2px; background: #f4c121; }
-    
-    .scroll-hint {
-      margin-top: 2rem;
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      color: #ccc8c0;
-      text-transform: uppercase;
-      animation: fadeUpDown 2s ease-in-out infinite;
-    }
-    @keyframes fadeUpDown {
-      0%, 100% { opacity: 0.4; transform: translateY(0); }
-      50% { opacity: 1; transform: translateY(4px); }
-    }
-
-    .portfolio-section { padding: 4rem 2.5rem; max-width: 1200px; margin: 0 auto; }
-    .section-label {
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      color: #888078;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 24px; /* PCでの余白を少し広げてクオリティアップ */
-    }
-    .work-card {
-      background: #ece8e0;
-      border-radius: 8px;
+    .lb-img-row { display: flex; align-items: center; gap: 14px; }
+    .lb-img {
+      width: 70vw;
+      max-width: 640px;
+      aspect-ratio: 16 / 9;
+      background: var(--card);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
-      border: 1px solid #e0dbd0;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .work-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(42,37,32,0.08); }
-    .work-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
-    .work-card-placeholder {
-      width: 100%; aspect-ratio: 4/3; background: #e4e0d8;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; color: #ccc8c0;
-    }
-    .more-btn {
-      display: block;
-      margin: 2.5rem auto 0;
-      font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
-      color: #aaa8a0; background: transparent; border: 1px solid #ddd8ce;
-      padding: 10px 32px; border-radius: 4px; cursor: pointer; transition: all 0.15s;
-    }
-    .more-btn:hover { background: #ece8e0; color: #2a2520; }
-
-    .lightbox {
-      display: none; position: fixed; inset: 0;
-      background: rgba(42,37,32,0.9); z-index: 1000;
-      align-items: center; justify-content: center;
-    }
-    .lightbox.open { display: flex; }
-    .lightbox-inner {
-      position: relative; max-width: 90vw; max-height: 90vh;
-      display: flex; align-items: center; gap: 1rem;
-    }
-    .lightbox img { max-width: 80vw; max-height: 85vh; object-fit: contain; border-radius: 4px; }
+    /* ライトボックス画像を入れる場合 */
+    /* .lb-img img { width: 100%; height: 100%; object-fit: contain; } */
+    .lb-img-ph { font-size: 11px; letter-spacing: .12em; color: var(--sub); }
     .lb-btn {
-      background: rgba(255,255,255,0.1); border: none; color: #fff;
-      font-size: 20px; width: 40px; height: 40px; border-radius: 50%;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: background 0.15s; flex-shrink: 0;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .15s;
+      flex-shrink: 0;
     }
     .lb-btn:hover { background: rgba(255,255,255,0.25); }
     .lb-close {
-      position: absolute; top: -44px; right: 0;
-      background: none; border: none; color: #fff;
-      font-size: 24px; cursor: pointer; line-height: 1; opacity: 0.7;
+      position: absolute;
+      top: -44px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      opacity: .7;
+      line-height: 1;
     }
     .lb-close:hover { opacity: 1; }
-
-    .profile-section { padding: 4rem 2.5rem; max-width: 680px; margin: 0 auto; }
-    .profile-card { background: #f4c121; border-radius: 4px; padding: 2.5rem; }
-    .profile-name { font-size: 18px; font-weight: 500; margin-bottom: 1rem; color: #2a2520; }
-    .profile-bio { font-size: 13px; color: #3a3028; line-height: 1.9; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(42,37,32,0.15); padding-bottom: 1.5rem; }
-    .profile-block { margin-bottom: 1.25rem; }
-    .profile-block h3 { font-size: 10px; letter-spacing: 0.15em; color: #6a5a20; text-transform: uppercase; margin-bottom: 0.75rem; }
-    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tag { font-size: 11px; background: #f8f4ee; color: #3a3028; padding: 3px 12px; border-radius: 20px; border: 1px solid rgba(42,37,32,0.1); }
-
-    .contact-section { padding: 4rem 2.5rem; max-width: 480px; margin: 0 auto; text-align: center; }
-    .contact-section p { font-size: 13px; color: #888078; line-height: 1.8; margin-bottom: 1.5rem; }
-    .contact-btn {
-      display: inline-block; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
-      color: #2a2520; border: none; padding: 12px 40px; border-radius: 4px;
-      text-decoration: none; background: #f4c121; transition: all 0.15s;
+    .lb-caption {
+      background: rgba(255,255,255,0.07);
+      border-radius: 4px;
+      padding: 16px 20px;
+      width: 100%;
     }
-    .contact-btn:hover { background: #e0b010; }
+    .lb-caption-title { font-size: 14px; font-weight: 500; color: #fff; margin-bottom: 8px; }
+    .lb-caption-desc { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.9; }
 
-    /* ==========================================================================
-       モバイル・タブレット対応（レスポンシブ調整）
-       ========================================================================== */
-    @media (max-width: 768px) {
+    /* ==================== HAMBURGER ==================== */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--dark);
+      transition: transform .25s, opacity .25s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 56px;
+      left: 0; right: 0;
+      background: var(--bg);
+      border-bottom: 3px solid var(--yellow);
+      z-index: 99;
+      padding: 8px 0 16px;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block;
+      padding: 12px 2rem;
+      font-size: 14px;
+      color: var(--dark);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: border-color .15s, color .15s;
+    }
+    .mobile-menu a:hover { border-left-color: var(--yellow); color: var(--dark); }
+    .mobile-menu a.active { border-left-color: var(--yellow); font-weight: 500; }
+
+    /* プロフィール：名前横に写真（モバイル用） */
+    .profile-name-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 4px;
+    }
+    .profile-name-row .profile-avatar-mobile {
+      display: none;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 2px solid var(--border);
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .profile-name-row .profile-avatar-mobile .avatar-ph { font-size: 8px; letter-spacing: .1em; color: var(--sub); }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 680px) {
       nav { padding: 0 1.25rem; }
-      .nav-links { gap: 1.25rem; }
-      .nav-links a { font-size: 13px; } /* スマホでのタップ領域・視認性向上のため少し拡大 */
-      
-      .fv-card { padding: 2.5rem 1.5rem; }
-      .fv-logo { width: 200px; }
-      
-      .portfolio-section { padding: 3rem 1.25rem; }
-      /* 2列表示を維持しつつ、隙間をほどよく調整 */
-      .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      
-      .profile-section { padding: 3rem 1.25rem; }
-      .profile-card { padding: 1.75rem 1.25rem; }
-      
-      /* スマホ用ライトボックス調整（矢印を押しやすく、画像を画面いっぱいに） */
-      .lightbox-inner { max-width: 95vw; gap: 0.5rem; }
-      .lightbox img { max-width: 75vw; }
-      .lb-btn { width: 36px; height: 36px; font-size: 16px; }
-    }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
 
-    /* 横幅が非常に狭いスマホ（旧機種など）向けの微調整 */
-    @media (max-width: 360px) {
-      .nav-links { gap: 0.75rem; }
-      .nav-links a { font-size: 11px; }
-      .portfolio-grid { grid-template-columns: 1fr; } /* 1列にして見やすく */
+      .hero { grid-template-columns: 1fr; padding: 40px 24px; }
+      .sec { padding: 40px 20px; }
+
+      /* プロフィール：デスクトップの右側アバターを非表示、名前横に小さいアバター表示 */
+      .profile-inner { grid-template-columns: 1fr; gap: 0; }
+      .profile-avatar { display: none; }
+      .profile-name-row .profile-avatar-mobile { display: flex; }
+
+      .works-grid { grid-template-columns: 1fr; }
+      .subnav { padding: 0 20px; }
+      .tab-section { padding: 28px 20px; }
+      .lp-grid { grid-template-columns: 1fr; }
+      .banner-grid { grid-template-columns: repeat(2, 1fr); }
+      .lb-img { width: 85vw; min-width: unset; }
+      .lb-inner { max-width: 95vw; }
     }
   </style>
 </head>
 <body>
+<div class="site">
 
+  <!-- ==================== NAV ==================== -->
   <nav>
-    <div class="nav-logo">
-  <a href="#" onclick="showSection('home', document.querySelector('.nav-links a')); return false;" style="display: flex; align-items: center; width: 100%;">
-    <img src="images/LimDslogo.svg" alt="LimDs">
-  </a>
+    <div class="nav-logo-box" onclick="showPage('home')">
+      <!-- ロゴ画像: <img src="images/LimDslogo.svg" alt="LimDs"> -->
+      <span class="nav-logo-ph">LOGO</span>
     </div>
-    <div class="nav-links">
-      <a href="#" class="active" onclick="showSection('home', this); return false;">Home</a>
-      <a href="#" onclick="showSection('home', this); setTimeout(() => { document.querySelector('.portfolio-section').scrollIntoView({behavior:'smooth'}); }, 50); return false;">Portfolio</a>
-      <a href="#" onclick="showSection('profile', this); return false;">Profile</a>
-      <a href="#" onclick="showSection('contact', this); return false;">Contact</a>
-    </div>
+    <ul class="nav-links">
+      <li><a class="active" onclick="showPage('home')">Home</a></li>
+      <li><a onclick="showPage('portfolio')">Works</a></li>
+      <li><a onclick="showPage('home'); setTimeout(()=>document.getElementById('profile-sec').scrollIntoView({behavior:'smooth'}),50)">Profile</a></li>
+      <li><a onclick="showPage('home'); setTimeout(()=>document.getElementById('process-sec').scrollIntoView({behavior:'smooth'}),50)">Process</a></li>
+      <li><a onclick="showPage('home'); setTimeout(()=>document.getElementById('contact-sec').scrollIntoView({behavior:'smooth'}),50)">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
-  <main class="main">
+  <!-- モバイルメニュー -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a class="active" onclick="showPage('home'); closeMenu()">Home</a>
+    <a onclick="showPage('portfolio'); closeMenu()">Works</a>
+    <a onclick="showPage('home'); closeMenu(); setTimeout(()=>document.getElementById('profile-sec').scrollIntoView({behavior:'smooth'}),50)">Profile</a>
+    <a onclick="showPage('home'); closeMenu(); setTimeout(()=>document.getElementById('process-sec').scrollIntoView({behavior:'smooth'}),50)">Process</a>
+    <a onclick="showPage('home'); closeMenu(); setTimeout(()=>document.getElementById('contact-sec').scrollIntoView({behavior:'smooth'}),50)">Contact</a>
+  </div>
 
-    <div id="home" class="section active">
-      <div class="fv">
-        <div class="fv-card">
-          <div class="fv-logo">
-            <img src="images/LimDslogo_B.svg" alt="LimDs">
-          </div>
-          <div class="fv-title">Portfolio</div>
-          <div class="fv-sub">Web Design &nbsp;／&nbsp; LP &nbsp;／&nbsp; Banner</div>
-          <div class="fv-divider"></div>
+  <!-- ==================== HOME PAGE ==================== -->
+  <div id="home" class="page active">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="hero-logo-box">
+          <!-- ロゴ画像: <img src="images/LimDslogo_B.svg" alt="LimDs"> -->
+          <span class="logo-placeholder">LOGO IMAGE</span>
         </div>
-        <div class="scroll-hint">↓ scroll</div>
+        <p class="welcome">Well come to Portfolio</p>
       </div>
-
-      <div class="portfolio-section">
-        <p class="section-label">Works</p>
-        <div class="portfolio-grid" id="portfolioGrid"></div>
-        <button class="more-btn" id="moreBtn" onclick="loadMore()" style="display:none">More</button>
+      <div style="padding-top: 4px;">
+        <p class="concept-label">Concept</p>
+        <p class="concept-headline">「伝わる」を大切にした<br>デザインを。</p>
+        <p class="concept-body">
+          デザインを学ぶ中で、見た目の美しさだけでなく、情報の分かりやすさや使いやすさの重要性を感じています。<br><br>
+          私は常にユーザーの目線に立ち「見る人にどう伝わるか」を意識しながら制作に取り組んでいます。<br><br>
+          一つひとつの制作に丁寧に向き合い、ユーザーとサービスをつなぐデザインを目指しています。
+        </p>
       </div>
-    </div>
+    </section>
 
-    <div id="profile" class="section">
-      <div class="profile-section">
-        <p class="section-label">Profile</p>
-        <div class="profile-card">
-          <p class="profile-name">オガワマリモ</p>
-          <p class="profile-bio">見ていただいてありがとうございます。<br>Webデザイナーのオガワマリモです。<br>学生の頃には漫画賞に応募して受賞したり、指導者のいない美術部で全道大会に出場したりなど、絵を描くことに勤しんでおりました。<br><br>これまで出版社、ニュース番組のテロップ制作、ライブやMVの撮影、地下アイドル運営など、さまざまな仕事を経験してきました。地下アイドル運営ではグッズやCD制作にも携わり、その後は映像制作会社やフリーランスとして、広告・MV・映画などの制作進行業務に携わってきました。<br><br>これまでの仕事では、クリエイターやクライアントを支える立場として制作に関わることが多くありました。しかし、子どもの頃から好きだった「作ること」への思いは変わらず、自分自身が技術を身につけ、手を動かして人に喜んでもらえるものを作りたいと考えるようになりました。<br><br>中国への語学留学を経て帰国後、スキルチェンジを決意し、2026年よりWebデザインの学習をスタート。現在はLPやバナー制作を中心に、見る人に伝わりやすく、目的に沿ったデザインを目指して制作に取り組んでいます。</p>
-          
-          <div class="profile-block">
-            <h3>Skills</h3>
+    <!-- PROFILE -->
+    <section class="sec sec-pale" id="profile-sec">
+      <p class="sec-label">Profile</p>
+      <div class="profile-inner">
+        <div>
+        <div class="profile-name-row">
+            <div class="profile-avatar-mobile">
+              <!-- プロフ写真（モバイル）: <img src="images/profile.jpg" alt="オガワマリモ"> -->
+              <span class="avatar-ph">PHOTO</span>
+            </div>
+            <div>
+              <p class="profile-name">オガワマリモ</p>
+              <p class="profile-role">WEB DESIGNER</p>
+            </div>
+          </div>
+          <p class="profile-text">
+            こんにちは！オガワマリモと申します。<br>
+            幼い頃は宮崎と北海道、南北両方の自然の洗礼を受け育ち、高校卒業後は東京で出版社・託児所・飲食店での仕事を経験後、エンタメ業界に興味を持ちインディーズバンドのライブ撮影や地下アイドルの運営を経験。その後映像制作会社を経てフリーランスのPM・APとして広告・CM・MV・映画・ドラマの現場に携わりました。<br><br>
+            2024年に夢の一つであった１年半にわたる中国語学留学の経験が改めて人生を見直すきっかけとなり、「やはり自分はものづくりが好き！自分の手がけたもので直接お客さんに喜んで欲しい！」という気持ちに気づき、2026年よりwebデザインを学び活動を開始しました。<br><br>
+            新しいことをしたがりがち。高所恐怖症。趣味は漫画と一人旅と中国語（HSK5級）。スパで朝から晩まで漫画を読んでいる時間が宇宙一幸せ！
+          </p>
+          <div class="skills-block">
+            <h4>Skills</h4>
             <div class="tags">
               <span class="tag">Figma</span>
               <span class="tag">Illustrator</span>
               <span class="tag">Photoshop</span>
-              <span class="tag">Premiere</span>
+              <span class="tag">Premiere Pro</span>
               <span class="tag">Studio</span>
             </div>
           </div>
-          
-          <div class="profile-block">
-            <h3>制作できるもの</h3>
+          <div class="skills-block" style="margin-top: 16px;">
+            <h4>制作できるもの</h4>
             <div class="tags">
-              <span class="tag">Webデザイン</span>
-              <span class="tag">LP</span>
-              <span class="tag">バナー</span>
+              <span class="tag">バナー・画像修正</span>
+              <span class="tag">LP（画像／ノーコード）</span>
+              <span class="tag">UIデザイン（Figma）</span>
+              <span class="tag">Webページ（ノーコード）</span>
+              <span class="tag">チラシ・名刺など印刷物</span>
+              <span class="tag">動画編集（Premiere）</span>
             </div>
           </div>
         </div>
+        <div class="profile-avatar">
+          <!-- プロフ写真: <img src="images/profile.jpg" alt="オガワマリモ"> -->
+          <span class="avatar-ph">PHOTO</span>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div id="contact" class="section">
-      <div class="contact-section">
-        <p class="section-label">Contact</p>
-        <p>お仕事のご依頼・ご質問はお気軽にどうぞ。</p>
-        <a class="contact-btn" href="mailto:marimo.web423@gmail.com">Mail</a>
+    <!-- WORKS -->
+    <section class="sec sec-card">
+      <p class="sec-label">Works</p>
+      <div class="works-grid">
+        <div class="work-cat-btn" onclick="showPage('portfolio'); showPortfolioTab('lp')">
+          <span>LP・Web サイト</span>
+        </div>
+        <div class="work-cat-btn" onclick="showPage('portfolio'); showPortfolioTab('banner')">
+          <span>Banner</span>
+        </div>
       </div>
-    </div>
+    </section>
 
-  </main>
+    <!-- PROCESS -->
+    <section class="sec sec-white" id="process-sec">
+      <p class="sec-label">Process</p>
+      <div class="process-steps">
+        <div class="p-step">
+          <div class="p-num">01</div>
+          <div>
+            <p class="p-title">お問い合わせ</p>
+            <p class="p-desc">まずはお問い合わせフォームよりお気軽にご相談ください。デザイン制作についてのお悩みや目的などをお聞きし、お見積りを算出します。</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="p-num">02</div>
+          <div>
+            <p class="p-title">ヒアリング</p>
+            <p class="p-desc">ご要望・目的・規模・イメージをお聞きします。ヒアリング内容を元に、企画・構成・お見積金額についてご提案いたします。</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="p-num">03</div>
+          <div>
+            <p class="p-title">ご契約</p>
+            <p class="p-desc">ご提案内容に同意いただけましたら、着手金として総額の半金を指定口座にお振込ください。</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="p-num">04</div>
+          <div>
+            <p class="p-title">制作開始</p>
+            <p class="p-desc">ご提案内容を確認いただいた上で制作に入ります。制作期間中は適宜、進捗報告・確認をしながら進めます。</p>
+          </div>
+        </div>
+        <div class="p-step">
+          <div class="p-num">05</div>
+          <div>
+            <p class="p-title">納品</p>
+            <p class="p-desc">最終チェック・修正後、納品とさせていただきます。</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <div class="lightbox" id="lightbox">
-    <div class="lightbox-inner">
-      <button class="lb-close" onclick="closeLightbox()">✕</button>
-      <button class="lb-btn" onclick="changeImage(-1)">&#8592;</button>
-      <img id="lbImg" src="" alt="">
-      <button class="lb-btn" onclick="changeImage(1)">&#8594;</button>
-    </div>
+    <!-- CONTACT -->
+    <section class="sec sec-pale" id="contact-sec">
+      <div class="contact-inner">
+        <p class="sec-label">Contact</p>
+        <p class="contact-title">お問い合わせ</p>
+        <div class="contact-divider"></div>
+        <p class="contact-sub">お仕事のご依頼・ご質問はお気軽にどうぞ。<br>2営業日以内にご返信いたします。</p>
+        <a class="btn-yellow" href="mailto:marimo.web423@gmail.com">Mail</a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-logo-box">
+        <!-- <img src="images/LimDslogo.svg" alt="LimDs" style="width:100%;height:auto;filter:brightness(0.5)"> -->
+        <span class="footer-logo-ph">LOGO</span>
+      </div>
+      <p class="footer-copy">© 2026 LimDs Portfolio. All rights reserved.</p>
+    </footer>
   </div>
 
-  <script>
-    // 既存のスクリプト処理をそのまま維持
-    const works = [
-      { src: "images/w-0001.jpg" },
-      { src: "images/w-0002.jpg" },
-      { src: "images/w-0003.jpg" },
-      { src: "images/w-0004.jpg" },
-      { src: "images/w-0005.jpg" },
-      { src: "images/w-0006.jpg" },
-      { src: "images/w-0008.jpg" },
-      { src: "images/w-0009.png" },
-      { src: "images/w-0010.jpg" },
-      { src: "images/w-0011.jpg" },
-      { src: "images/w-0012.jpg" },
-    ];
+  <!-- ==================== PORTFOLIO PAGE ==================== -->
+  <div id="portfolio" class="page">
+    <div class="subnav">
+      <a id="tab-lp" class="active" onclick="showPortfolioTab('lp')">LP / Web</a>
+      <a id="tab-banner" onclick="showPortfolioTab('banner')">Banner</a>
+    </div>
 
-    const PER_PAGE = 20;
-    let shown = 0;
+    <!-- LP / WEB -->
+    <div id="sec-lp" class="tab-section active">
+      <div class="lp-grid" id="lpGrid">
+        <!-- JS で生成 -->
+      </div>
+    </div>
 
-    function renderWorks() {
-      const grid = document.getElementById('portfolioGrid');
-      const next = works.slice(shown, shown + PER_PAGE);
-      
-      next.forEach((w, i) => {
-        const card = document.createElement('div');
-        card.className = 'work-card';
-        const idx = shown + i;
-        card.onclick = () => openLightbox(idx);
-        if (w.src) {
-          card.innerHTML = `<img src="${w.src}" alt="">`;
-        } else {
-          card.innerHTML = `<div class="work-card-placeholder">画像をここに</div>`;
-        }
-        grid.appendChild(card);
-      });
-      
-      shown += next.length;
-      document.getElementById('moreBtn').style.display = shown < works.length ? 'block' : 'none';
-    }
+    <!-- BANNER -->
+    <div id="sec-banner" class="tab-section">
+      <div class="banner-grid" id="bannerGrid">
+        <!-- JS で生成 -->
+      </div>
+    </div>
 
-    function loadMore() { renderWorks(); }
+    <footer>
+      <div class="footer-logo-box">
+        <span class="footer-logo-ph">LOGO</span>
+      </div>
+      <p class="footer-copy">© 2026 LimDs Portfolio. All rights reserved.</p>
+    </footer>
+  </div>
 
-    let currentIdx = 0;
-    function openLightbox(idx) {
-      currentIdx = idx;
-      const w = works[idx];
-      if (!w.src) return;
-      document.getElementById('lbImg').src = w.src;
-      document.getElementById('lightbox').classList.add('open');
-    }
-    
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('open');
-    }
-    
-    function changeImage(dir) {
-      let next = currentIdx + dir;
-      while (next >= 0 && next < works.length && !works[next].src) next += dir;
-      if (next >= 0 && next < works.length && works[next].src) {
-        currentIdx = next;
-        document.getElementById('lbImg').src = works[next].src;
-      }
-    }
-    
-    document.getElementById('lightbox').addEventListener('click', function(e) {
-      if (e.target === this) closeLightbox();
-    });
-    
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowRight') changeImage(1);
-      if (e.key === 'ArrowLeft') changeImage(-1);
-    });
+</div><!-- /.site -->
 
-    function showSection(id, el) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      el.classList.add('active');
-      window.scrollTo(0, 0);
-      return false;
-    }
+<!-- ==================== LIGHTBOX ==================== -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-inner">
+    <button class="lb-close" onclick="closeLB()">✕</button>
+    <div class="lb-img-row">
+      <button class="lb-btn" onclick="changeLB(-1)">&#8592;</button>
+      <div class="lb-img">
+        <!-- <img id="lbImg" src="" alt=""> -->
+        <span class="lb-img-ph" id="lbImgPh">IMAGE</span>
+      </div>
+      <button class="lb-btn" onclick="changeLB(1)">&#8594;</button>
+    </div>
+    <div class="lb-caption">
+      <p class="lb-caption-title" id="lbTitle"></p>
+      <p class="lb-caption-desc" id="lbDesc"></p>
+    </div>
+  </div>
+</div>
 
-    renderWorks();
-  </script>
+<script>
+  function toggleMenu() {
+    const btn = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileMenu');
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
 
+  // ============================================================
+  // 作品データ
+  // src に画像パスを入れてください（例: "images/w-lp-001.jpg"）
+  // ============================================================
+  const works = {
+    lp: [
+      { src: '', title: 'サービス紹介LP', desc: 'サービスの魅力を伝えるランディングページです。ターゲットに響くビジュアルと導線設計を意識して制作しました。', url: '' },
+      { src: '', title: 'コーポレートサイト', desc: '企業の信頼感と親しみやすさを両立したWebサイトデザインです。', url: '' },
+      { src: '', title: 'ECサイトLP', desc: '商品の世界観を引き立てるシンプルなECページデザインです。', url: '' },
+      { src: '', title: 'イベントサイト', desc: '告知からエントリーまでをスムーズにつなぐイベントページです。', url: '' },
+    ],
+    banner: [
+      { src: '', title: 'SNSバナー A', desc: 'Instagram用の正方形バナーデザイン。視認性を高めた構成で制作しました。' },
+      { src: '', title: 'SNSバナー B', desc: 'Twitter/X用のバナーデザイン。シンプルなビジュアルで情報を整理しています。' },
+      { src: '', title: 'Web広告バナー', desc: 'Web広告用のバナーデザイン。クリック率を意識したレイアウトです。' },
+      { src: '', title: 'キャンペーンバナー', desc: '季節キャンペーン用のバナーデザインです。' },
+      { src: '', title: 'バナー広告 C', desc: 'サービス訴求用のバナーデザインです。' },
+      { src: '', title: '店舗告知バナー', desc: '店舗の新着情報を告知するためのバナーデザインです。' },
+    ]
+  };
+
+  // LP グリッドを生成
+  function buildLpGrid() {
+    const grid = document.getElementById('lpGrid');
+    grid.innerHTML = works.lp.map((w, i) => `
+      <div class="lp-card" onclick="openLB('lp',${i})">
+        <div class="lp-thumb">
+          ${w.src ? `<img src="${w.src}" alt="${w.title}">` : `<span class="lp-thumb-ph">IMAGE</span>`}
+        </div>
+        <div class="lp-info">
+          <p class="lp-title">${w.title}</p>
+          ${w.url ? `<a class="lp-view" href="${w.url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">view</a>`
+                  : `<a class="lp-view" onclick="event.stopPropagation(); openLB('lp',${i})">view</a>`}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Banner グリッドを生成
+  function buildBannerGrid() {
+    const grid = document.getElementById('bannerGrid');
+    grid.innerHTML = works.banner.map((w, i) => `
+      <div class="banner-card" onclick="openLB('banner',${i})">
+        <div class="banner-thumb">
+          ${w.src ? `<img src="${w.src}" alt="${w.title}">` : `<span class="banner-thumb-ph">IMAGE</span>`}
+        </div>
+        <div class="banner-info">
+          <p class="banner-title">${w.title}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  buildLpGrid();
+  buildBannerGrid();
+
+  // ============================================================
+  // ページ切り替え
+  // ============================================================
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    const idx = { home: 0, portfolio: 1 }[id];
+    if (idx !== undefined) document.querySelectorAll('.nav-links a')[idx].classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function showPortfolioTab(tab) {
+    document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.subnav a').forEach(a => a.classList.remove('active'));
+    document.getElementById('sec-' + tab).classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+    currentType = tab;
+  }
+
+  // ============================================================
+  // ライトボックス
+  // ============================================================
+  let currentType = 'lp', currentIdx = 0;
+
+  function openLB(type, idx) {
+    currentType = type;
+    currentIdx = idx;
+    updateLB();
+    document.getElementById('lightbox').classList.add('open');
+  }
+
+  function updateLB() {
+    const w = works[currentType][currentIdx];
+    document.getElementById('lbTitle').textContent = w.title;
+    document.getElementById('lbDesc').textContent = w.desc;
+    // 画像がある場合: document.getElementById('lbImg').src = w.src;
+  }
+
+  function closeLB() { document.getElementById('lightbox').classList.remove('open'); }
+
+  function changeLB(dir) {
+    const len = works[currentType].length;
+    currentIdx = (currentIdx + dir + len) % len;
+    updateLB();
+  }
+
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target === document.getElementById('lightbox')) closeLB();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLB();
+    if (e.key === 'ArrowRight') changeLB(1);
+    if (e.key === 'ArrowLeft') changeLB(-1);
+  });
+</script>
 </body>
 </html>
