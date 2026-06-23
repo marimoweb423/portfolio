@@ -95,12 +95,12 @@
       text-align: center;
     }
     .hero-catch {
-  font-size: 11px;
-  letter-spacing: 0.3em;
-  color: rgba(42,37,32,0.6);
-  margin-bottom: 12px;
-  text-transform: uppercase;
-}
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: rgba(42,37,32,0.6);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
     .hero-right { padding-left: 40px; }
     .concept-label {
       font-size: 12px;
@@ -253,32 +253,43 @@
     .footer-logo img { width: 100%; height: 100%; object-fit: contain; filter: brightness(2.5); }
     .footer-copy { font-size: 10px; color: rgba(255,255,255,0.22); letter-spacing: .1em; }
 
-    /* PORTFOLIO PAGE */
-    .subnav {
+    /* PORTFOLIO PAGE — セグメンテッドコントロール */
+    .subnav-wrap {
       background: var(--bg);
       border-bottom: 2px solid var(--border);
-      padding: 0 48px;
-      display: flex;
-      gap: 2.5rem;
+      padding: 20px 48px;
       position: sticky;
       top: 56px;
       z-index: 90;
+      display: flex;
+      justify-content: center;
+    }
+    .subnav {
+      display: inline-flex;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px;
+      gap: 4px;
     }
     .subnav a {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
-      letter-spacing: .1em;
-      color: var(--sub);
+      letter-spacing: .08em;
+      color: var(--muted);
       text-decoration: none;
-      padding: 16px 0;
-      border-bottom: 3px solid transparent;
+      padding: 10px 28px;
+      border-radius: 999px;
       cursor: pointer;
-      transition: color .15s;
+      transition: color .15s, background .15s;
       display: inline-block;
-      margin-bottom: -2px;
     }
     .subnav a:hover { color: var(--dark); }
-    .subnav a.active { color: var(--dark); border-bottom: 3px solid var(--yellow); }
+    .subnav a.active {
+      color: var(--dark);
+      background: var(--yellow);
+      font-weight: 600;
+    }
     .tab-section { display: none; padding: 48px; background: var(--bg); }
     .tab-section.active { display: block; }
 
@@ -292,7 +303,7 @@
       cursor: pointer;
       transition: transform .2s, box-shadow .2s;
       text-decoration: none;
-display: block;
+      display: block;
     }
     .lp-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(42,37,32,0.1); }
     .lp-thumb {
@@ -320,12 +331,11 @@ display: block;
     .lp-info { padding: 14px 16px; }
     .lp-title { font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 6px; }
     .lp-desc {
-  font-size: 11px;
-  line-height: 1.8;
-  color: var(--muted);
-  margin-top: 4px;
-}
-    
+      font-size: 11px;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-top: 4px;
+    }
     .lp-view {
       font-size: 11px;
       color: var(--yellow);
@@ -394,15 +404,17 @@ display: block;
     .lb-img {
       width: 70vw;
       max-width: 640px;
-      aspect-ratio: 16 / 9;
-      background: var(--card);
-      border-radius: 4px;
-      overflow: hidden;
+      max-height: 70vh;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .lb-img img { width: 100%; height: 100%; object-fit: contain; }
+    .lb-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 32px rgba(0,0,0,0.5));
+    }
     .lb-btn {
       background: rgba(255,255,255,0.1);
       border: none;
@@ -507,7 +519,9 @@ display: block;
       .profile-avatar { display: none; }
       .profile-avatar-mobile { display: block; }
       .works-grid { grid-template-columns: 1fr; }
-      .subnav { padding: 0 20px; }
+      .subnav-wrap { padding: 16px 20px; }
+      .subnav { width: 100%; }
+      .subnav a { flex: 1; text-align: center; padding: 10px 12px; }
       .tab-section { padding: 28px 20px; }
       .lp-grid { grid-template-columns: 1fr; }
       .banner-grid { grid-template-columns: repeat(2, 1fr); }
@@ -620,11 +634,11 @@ display: block;
     <section class="sec sec-card">
       <p class="sec-label">Works</p>
       <div class="works-grid">
-        <div class="work-cat-btn" onclick="showPage('portfolio'); showPortfolioTab('lp')">
-          <span>LP・Web サイト</span>
-        </div>
         <div class="work-cat-btn" onclick="showPage('portfolio'); showPortfolioTab('banner')">
           <span>Banner</span>
+        </div>
+        <div class="work-cat-btn" onclick="showPage('portfolio'); showPortfolioTab('lp')">
+          <span>LP・Web サイト</span>
         </div>
       </div>
     </section>
@@ -677,17 +691,19 @@ display: block;
 
   <!-- PORTFOLIO PAGE -->
   <div id="portfolio" class="page">
-    <div class="subnav">
-      <a id="tab-lp" class="active" onclick="showPortfolioTab('lp')">LP / Web</a>
-      <a id="tab-banner" onclick="showPortfolioTab('banner')">Banner</a>
+    <div class="subnav-wrap">
+      <div class="subnav">
+        <a id="tab-banner" class="active" onclick="showPortfolioTab('banner')">Banner</a>
+        <a id="tab-lp" onclick="showPortfolioTab('lp')">LP / Web</a>
+      </div>
     </div>
 
-    <div id="sec-lp" class="tab-section active">
-      <div class="lp-grid" id="lpGrid"></div>
-    </div>
-
-    <div id="sec-banner" class="tab-section">
+    <div id="sec-banner" class="tab-section active">
       <div class="banner-grid" id="bannerGrid"></div>
+    </div>
+
+    <div id="sec-lp" class="tab-section">
+      <div class="lp-grid" id="lpGrid"></div>
     </div>
 
     <footer>
@@ -728,7 +744,7 @@ display: block;
     banner: [
       { src: 'images/w-0014.png', title: '大人向け敏感肌用保湿化粧水', desc: '▫️架空案件 ▫️敏感肌に悩む30-40代女性 ▫️”自然由来感を印象付けるために清流のような澄んだ冷たさを表現することに注力しつつ、ターゲットの年齢層が一括りになりがちなオーガニックなデザインをいかに”大人の女性向け”の上品な印象にするかを意識して制作しました。' },
       { src: 'images/w-0013.png', title: 'エイジングケア高級美容液', desc: '▫️架空案件 ▫️アンチエイジングを気にする30-40代女性 ▫️”高そう＝良さそう”ではなく、”良さそう＝使ってみたい”と感じてもらうことを意識し、上品さを保ちつつ瑞々しく弾ける表現を意識して制作しました' },
-   { src: 'images/w-0009.png', title: '転職エージェントサービス', desc: '▫️架空案件 ▫️転職を検討している30代の男性 ▫️信頼感と転職への期待感・相談のしすい親しみやすさを意識して制作しました' },
+      { src: 'images/w-0009.png', title: '転職エージェントサービス', desc: '▫️架空案件 ▫️転職を検討している30代の男性 ▫️信頼感と転職への期待感・相談のしすい親しみやすさを意識して制作しました' },
       { src: 'images/w-0012.jpg', title: '貴金属買取販売店サイトFV', desc: '▫️架空案件 ▫️高価買取を希望する30〜50代 ▫️「安心感」と「買取価格への期待感」を意識して制作しました' },
       { src: 'images/w-0011.jpg', title: '貴金属買取販売店サイトFV', desc: '▫️架空案件 ▫️高価買取を希望する30〜50代 ▫️「安心感」と「買取価格への期待感」を意識して制作しました' },
       { src: 'images/w-0010.jpg', title: '貴金属買取販売店サイトFV', desc: '▫️架空案件 ▫️高価買取を希望する30〜50代 ▫️「安心感」と「買取価格への期待感」を意識を意識して制作しました' },
@@ -738,25 +754,23 @@ display: block;
       { src: 'images/w-0001.jpg', title: '家事代行サービス', desc: '▫️架空案件 ▫️たまには羽を伸ばしたいお母さんや共働きの主婦層 ▫️「家事を休憩」=「自分へのプレゼント」を意識し制作しました' },
     ]
   };
-function buildLpGrid() {
-  document.getElementById('lpGrid').innerHTML = works.lp.map((w) => `
-    <a class="lp-card"
-       href="${w.url}"
-       target="_blank"
-       rel="noopener">
 
-      <div class="lp-thumb">
-        <img src="${w.src}" alt="${w.title}">
-      </div>
-
-      <div class="lp-info">
-        <p class="lp-title">${w.title}</p>
-        <p class="lp-desc">${w.desc}</p>
-      </div>
-
-    </a>
-  `).join('');
-}
+  function buildLpGrid() {
+    document.getElementById('lpGrid').innerHTML = works.lp.map((w) => `
+      <a class="lp-card"
+         href="${w.url}"
+         target="_blank"
+         rel="noopener">
+        <div class="lp-thumb">
+          <img src="${w.src}" alt="${w.title}">
+        </div>
+        <div class="lp-info">
+          <p class="lp-title">${w.title}</p>
+          <p class="lp-desc">${w.desc}</p>
+        </div>
+      </a>
+    `).join('');
+  }
 
   function buildBannerGrid() {
     document.getElementById('bannerGrid').innerHTML = works.banner.map((w, i) => `
@@ -777,6 +791,7 @@ function buildLpGrid() {
     const idx = { home: 0, portfolio: 1 }[id];
     if (idx !== undefined) document.querySelectorAll('.nav-links a')[idx].classList.add('active');
     window.scrollTo(0, 0);
+    updateHash();
   }
 
   function showPortfolioTab(tab) {
@@ -785,9 +800,27 @@ function buildLpGrid() {
     document.getElementById('sec-' + tab).classList.add('active');
     document.getElementById('tab-' + tab).classList.add('active');
     currentType = tab;
+    updateHash();
   }
 
-  let currentType = 'lp', currentIdx = 0;
+  function updateHash() {
+    const page = document.getElementById('portfolio').classList.contains('active') ? 'portfolio' : 'home';
+    const hash = page === 'portfolio' ? `#portfolio-${currentType}` : '#home';
+    history.replaceState(null, '', hash);
+  }
+
+  function restoreFromHash() {
+    const hash = location.hash;
+    if (hash.startsWith('#portfolio')) {
+      const tab = hash.includes('lp') ? 'lp' : 'banner';
+      showPage('portfolio');
+      showPortfolioTab(tab);
+    } else {
+      showPage('home');
+    }
+  }
+
+  let currentType = 'banner', currentIdx = 0;
 
   function openLB(type, idx) {
     currentType = type; currentIdx = idx;
@@ -819,6 +852,8 @@ function buildLpGrid() {
     if (e.key === 'ArrowRight') changeLB(1);
     if (e.key === 'ArrowLeft') changeLB(-1);
   });
+
+  restoreFromHash();
 
   function toggleMenu() {
     document.getElementById('hamburger').classList.toggle('open');
