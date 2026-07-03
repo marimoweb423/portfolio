@@ -208,23 +208,41 @@
       border: 1px solid var(--yellow);
     }
 
-    /* WORKS (HOME) */
-    .works-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    /* WORKS (HOME) — 単一のバナーリンク、中央寄せ */
+    .works-grid {
+      display: flex;
+      justify-content: center;
+    }
     .work-cat-btn {
-      background: var(--bg);
+      width: 100%;
+      max-width: 360px;
       aspect-ratio: 16 / 9;
       border-radius: 6px;
       border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       cursor: pointer;
       transition: transform .2s, box-shadow .2s;
       position: relative;
       overflow: hidden;
+      background: var(--bg);
     }
     .work-cat-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(42,37,32,0.1); }
-    .work-cat-btn span { font-size: 13px; letter-spacing: .15em; color: var(--dark); font-weight: 500; }
+    .work-cat-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .work-cat-btn span {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 14px 0;
+      text-align: center;
+      font-size: 13px;
+      letter-spacing: .15em;
+      color: #fff;
+      font-weight: 500;
+      background: linear-gradient(to top, rgba(42,37,32,0.65), rgba(42,37,32,0));
+    }
     .work-cat-btn::after {
       content: '';
       position: absolute;
@@ -558,7 +576,7 @@
       .profile-inner { grid-template-columns: 1fr; gap: 0; }
       .profile-avatar { display: none; }
       .profile-avatar-mobile { display: block; }
-      .works-grid { grid-template-columns: 1fr; }
+      .work-cat-btn { max-width: 100%; }
       .subnav-wrap { padding: 16px 20px; }
       .subnav { width: 100%; }
       .subnav a { flex: 1; text-align: center; padding: 10px 12px; }
@@ -675,10 +693,8 @@
       <p class="sec-label">Works</p>
       <div class="works-grid">
         <div class="work-cat-btn" onclick="showPage('portfolio'); showPortfolioTab('banner')">
-          <span>Banner</span>
-        </div>
-        <div class="work-cat-btn" onclick="showPage('portfolio'); showPortfolioTab('lp')">
-          <span>LP・Web サイト</span>
+          <img src="images/PFサムネ.png" alt="Works">
+          <span>Works</span>
         </div>
       </div>
     </section>
