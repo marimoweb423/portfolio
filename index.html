@@ -46,6 +46,8 @@
       --bg: #f8f4ee;
       --yellow: #f4c121;
       --yd: #e0b010;
+      --accent: #d97757;
+      --accent-d: #c2603f;
       --dark: #2a2520;
       --card: #ece8e0;
       --border: #e0dbd0;
@@ -208,47 +210,63 @@
       border: 1px solid var(--yellow);
     }
 
-    /* WORKS (HOME) — 単一のバナーリンク、中央寄せ */
+    /* WORKS (HOME) — 単一のリンク、中央寄せ（コンパクトなボタン） */
     .works-grid {
       display: flex;
       justify-content: center;
     }
     .work-cat-btn {
-      width: 100%;
-      max-width: 360px;
-      aspect-ratio: 16 / 9;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 28px 56px;
       border-radius: 6px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--accent);
       cursor: pointer;
-      transition: transform .2s, box-shadow .2s;
+      transition: transform .2s, box-shadow .2s, background .2s;
       position: relative;
-      overflow: hidden;
-      background: var(--bg);
+      background: var(--accent);
     }
-    .work-cat-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(42,37,32,0.1); }
-    .work-cat-btn img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .work-cat-btn span {
-      position: absolute;
-      left: 0; right: 0; bottom: 0;
-      padding: 14px 0;
-      text-align: center;
-      font-size: 13px;
-      letter-spacing: .15em;
-      color: #fff;
+    .work-cat-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(42,37,32,0.18); background: var(--accent-d); }
+    .work-cat-btn .work-eyebrow {
+      font-size: 10px;
+      letter-spacing: .3em;
+      color: rgba(255,255,255,0.85);
+      text-transform: uppercase;
       font-weight: 500;
-      background: linear-gradient(to top, rgba(42,37,32,0.65), rgba(42,37,32,0));
     }
+    .work-cat-btn .work-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 400;
+      letter-spacing: .1em;
+      color: #fff;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+    .work-cat-btn .work-cta {
+      font-size: 11px;
+      letter-spacing: .16em;
+      color: rgba(255,255,255,0.75);
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .work-cat-btn .work-cta .arrow {
+      transition: transform .2s;
+      display: inline-block;
+      color: #fff;
+    }
+    .work-cat-btn:hover .work-cta .arrow { transform: translateX(4px); }
     .work-cat-btn::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
       height: 3px;
-      background: var(--yellow);
+      background: #fff;
+      opacity: 0.85;
       transform: scaleX(0);
       transition: transform .25s;
       transform-origin: left;
@@ -693,8 +711,9 @@
       <p class="sec-label">Works</p>
       <div class="works-grid">
         <div class="work-cat-btn" onclick="showPage('portfolio'); showPortfolioTab('banner')">
-          <img src="images/PFサムネ.png" alt="Works">
-          <span>Works</span>
+          <span class="work-eyebrow">Selected Works</span>
+          <span class="work-title">Portfolio</span>
+          <span class="work-cta">View All Works <span class="arrow">→</span></span>
         </div>
       </div>
     </section>
